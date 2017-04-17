@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/item_selecter_bg"
+                android:gravity="center_vertical"
+                android:padding="@dimen/px20"
+    >
+
+    <ImageView
+        android:id="@+id/item_app_uninstall_iv"
+        android:layout_width="@dimen/px100"
+        android:layout_height="@dimen/px100"
+        android:layout_margin="@dimen/px10"
+        android:scaleType="fitCenter"
+        />
+
+    <TextView
+        android:id="@+id/item_app_uninstall_name"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/px100"
+        android:layout_margin="@dimen/px10"
+        android:layout_toRightOf="@id/item_app_uninstall_iv"
+        android:gravity="center"
+        android:text="name"
+        android:textColor="@color/white"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/px100"
+        android:layout_alignParentRight="true"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:text="@string/app_uninstall"
+        android:textColor="@color/white"
+        android:textSize="30sp"/>
+
+</RelativeLayout>

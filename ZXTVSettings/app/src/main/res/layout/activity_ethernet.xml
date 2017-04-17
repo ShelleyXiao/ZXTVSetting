@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/bg"
+              android:orientation="vertical">
+
+    <include
+        android:id="@+id/statu"
+        layout="@layout/status_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px130"
+        android:layout_marginTop="@dimen/px10"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px100"
+        android:layout_marginTop="@dimen/px80"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/ethernet_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/ethernet_title"
+            android:textAppearance="@style/TextAppearance.TileTitle"
+            android:textColor="@color/white"
+            />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/network_framelayout"
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent"
+        />
+
+</LinearLayout>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    tools:context=".activity.MainActivity">
+
+    <!--<com.zx.zxtvsettings.view.ViewStatusTitleView-->
+    <!--android:id="@+id/status_bar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/px60"-->
+    <!--android:layout_margin="@dimen/px20"/>-->
+
+    <include
+        android:id="@+id/statu"
+        layout="@layout/status_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px130"
+        android:layout_marginTop="@dimen/px10"
+        />
+
+    <View
+        android:id="@+id/status_back"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/tran"
+        android:visibility="invisible"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/statu">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="@dimen/px359"
+            android:layout_height="@dimen/px150"
+            android:layout_margin="@dimen/px200"
+            android:scaleType="fitXY"
+            android:src="@drawable/zhaoxin"/>
+
+        <RelativeLayout
+            android:layout_width="@dimen/px800"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px200"
+            android:layout_marginTop="@dimen/px100"
+            android:layout_toRightOf="@+id/logo">
+
+            <TextView
+                android:id="@+id/device_name_label"
+                style="@style/aboutTextStyle"
+                android:text="@string/about_device_name"/>
+
+            <TextView
+                android:id="@+id/device_name"
+                style="@style/aboutTextStyle"
+                android:layout_toRightOf="@+id/device_android_label"
+                android:text="@string/about_device_android"/>
+
+            <TextView
+                android:id="@+id/device_android_label"
+                style="@style/aboutTextStyle"
+                android:layout_below="@+id/device_name_label"
+                android:text="@string/about_device_android"/>
+
+            <TextView
+                android:id="@+id/device_android"
+                style="@style/aboutTextStyle"
+                android:layout_below="@+id/device_name_label"
+                android:layout_toRightOf="@+id/device_android_label"
+                android:text="@string/about_device_android"/>
+
+            <TextView
+                android:id="@+id/device_version_label"
+                style="@style/aboutTextStyle"
+                android:layout_below="@+id/device_android_label"
+                android:text="@string/about_device_version"/>
+
+            <TextView
+                android:id="@+id/device_version"
+                style="@style/aboutTextStyle"
+                android:layout_below="@+id/device_android"
+                android:layout_toRightOf="@+id/device_version_label"
+                android:text="@string/about_device_android"/>
+
+
+            <TextView
+                android:id="@+id/device_mac_label"
+                style="@style/aboutTextStyle"
+                android:layout_below="@+id/device_version_label"
+                android:text="@string/about_device_mac"/>
+
+            <TextView
+                android:id="@+id/device_mac"
+                style="@style/aboutTextStyle"
+                android:layout_below="@+id/device_version"
+                android:layout_toRightOf="@+id/device_mac_label"
+                android:text="@string/about_device_android"/>
+
+            <TextView
+                android:id="@+id/device_ip_label"
+                style="@style/aboutTextStyle"
+                android:layout_below="@+id/device_mac_label"
+                android:text="@string/about_device_ip"/>
+
+            <TextView
+                android:id="@+id/device_ip"
+                style="@style/aboutTextStyle"
+                android:layout_below="@+id/device_mac"
+                android:layout_toRightOf="@+id/device_ip_label"
+                android:text="@string/about_device_android"/>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

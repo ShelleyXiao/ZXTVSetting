@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/bg"
+    android:layout_height="match_parent"
+    >
+
+    <include
+        android:id="@+id/statu"
+        layout="@layout/status_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px130"
+        android:layout_marginTop="@dimen/px10"
+        />
+
+    <View
+        android:id="@+id/status_back"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:background="@drawable/tran"
+        android:visibility="invisible"/>
+
+    <ListView
+        android:id="@+id/app_uninstall_lv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top"
+        android:layout_marginTop="@dimen/px50"
+        android:layout_marginBottom="@dimen/px100"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="@dimen/px200"
+        android:layout_marginLeft="@dimen/px200"
+        android:listSelector="#00000000"
+        android:scrollbars="none"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_uninstall_title"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:layout_marginTop="@dimen/px120"
+        android:layout_alignLeft="@id/app_uninstall_lv"
+        android:visibility="gone"
+        />
+
+    <FrameLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px120"
+        android:layout_below="@+id/statu"
+        android:layout_marginLeft="@dimen/px50"
+        android:layout_marginRight="@dimen/px50" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/px80"
+            android:gravity="center"
+            android:text="@string/app_uninstall_title"
+            android:textColor="@color/zx_green"
+            android:textSize="28sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px1"
+            android:layout_gravity="bottom"
+            android:background="@drawable/add_common_line" />
+    </FrameLayout>
+
+
+</RelativeLayout>

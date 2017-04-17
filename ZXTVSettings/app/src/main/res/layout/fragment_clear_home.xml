@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingRight="@dimen/px100"
+                android:paddingTop="@dimen/px80">
+
+    <TextView
+        android:id="@+id/clear_total_count"
+        style="@style/clearTextStyle"
+        android:layout_alignBottom="@+id/clear_total_size"
+        android:focusable="false"
+        android:text="@string/clear_total_count"/>
+
+    <TextView
+        android:id="@+id/clear_total_size"
+        style="@style/clearTextStyle"
+        android:layout_alignParentRight="true"
+        android:focusable="false"
+        android:text="2.44GB"
+        android:textSize="32sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/clear_total_count"
+        android:background="@color/clear_dividing_line"
+        android:focusable="false"/>
+
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_div"
+        android:layout_below="@+id/clear_total_count">
+
+
+        <ScrollView
+            android:id="@+id/content_S"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:id="@+id/system_cache"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/px10"
+                    android:layout_marginTop="@dimen/px10"
+                    android:background="@drawable/clear_item_selecter_bg"
+                    android:nextFocusDown="@+id/temp_file">
+
+                    <TextView
+                        android:id="@+id/system_cache_lable"
+                        style="@style/clearTextStyle"
+                        android:text="@string/system_cache"
+                        />
+
+                    <TextView
+                        android:id="@+id/system_cache_count"
+                        style="@style/clearTextStyle"
+                        android:layout_toRightOf="@+id/system_cache_lable"
+                        android:text="@string/clear_count"
+                        android:visibility="gone"
+                        />
+
+
+                    <ProgressBar
+                        android:id="@+id/system_cache_progress"
+                        android:layout_width="@dimen/px25"
+                        android:layout_height="@dimen/px25"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/px20"/>
+
+                    <TextView
+                        android:id="@+id/system_cache_size"
+                        style="@style/clearTextStyle"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/px20"
+                        android:drawableRight="@drawable/clean_more"
+                        android:text="42MB"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/temp_file"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/system_cache"
+                    android:layout_marginBottom="@dimen/px10"
+                    android:layout_marginTop="@dimen/px10"
+                    android:background="@drawable/clear_item_selecter_bg"
+                    android:nextFocusDown="@+id/apk_zip">
+
+                    <TextView
+                        android:id="@+id/temp_file_lable"
+                        style="@style/clearTextStyle"
+                        android:text="@string/temp_file"
+                        />
+
+                    <TextView
+                        android:id="@+id/temp_file_count"
+                        style="@style/clearTextStyle"
+                        android:layout_toRightOf="@+id/temp_file_lable"
+                        android:text="@string/clear_count"
+                        android:visibility="gone"
+                        />
+
+
+                    <ProgressBar
+                        android:id="@+id/temp_file_progress"
+                        android:layout_width="@dimen/px25"
+                        android:layout_height="@dimen/px25"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/px20"/>
+
+                    <TextView
+                        android:id="@+id/temp_file_size"
+                        style="@style/clearTextStyle"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/px20"
+                        android:drawableRight="@drawable/clean_more"
+                        android:text="42MB"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/apk_zip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/temp_file"
+                    android:layout_marginBottom="@dimen/px10"
+                    android:layout_marginTop="@dimen/px10"
+                    android:background="@drawable/clear_item_selecter_bg"
+                    android:nextFocusDown="@+id/big_file">
+
+                    <TextView
+                        android:id="@+id/apk_zip_lable"
+                        style="@style/clearTextStyle"
+                        android:text="@string/apk_zip"
+                        />
+
+                    <TextView
+                        android:id="@+id/apk_zip_count"
+                        style="@style/clearTextStyle"
+                        android:layout_toRightOf="@+id/apk_zip_lable"
+                        android:text="@string/clear_count"
+                        android:visibility="gone"
+                        />
+
+
+                    <ProgressBar
+                        android:id="@+id/apk_zip_progress"
+                        android:layout_width="@dimen/px25"
+                        android:layout_height="@dimen/px25"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/px20"/>
+
+                    <TextView
+                        android:id="@+id/apk_zip_size"
+                        style="@style/clearTextStyle"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/px20"
+                        android:drawableRight="@drawable/clean_more"
+                        android:text="42MB"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/big_file"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/apk_zip"
+                    android:layout_marginBottom="@dimen/px10"
+                    android:layout_marginTop="@dimen/px10"
+                    android:background="@drawable/clear_item_selecter_bg"
+                    android:nextFocusDown="@+id/software_last">
+
+                    <TextView
+                        android:id="@+id/big_file_lable"
+                        style="@style/clearTextStyle"
+                        android:text="@string/big_file"
+                        />
+
+                    <TextView
+                        android:id="@+id/big_file_count"
+                        style="@style/clearTextStyle"
+                        android:layout_toRightOf="@+id/big_file_lable"
+                        android:text="@string/clear_count"
+                        android:visibility="gone"
+                        />
+
+
+                    <ProgressBar
+                        android:id="@+id/big_file_progress"
+                        android:layout_width="@dimen/px25"
+                        android:layout_height="@dimen/px25"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/px20"/>
+
+                    <TextView
+                        android:id="@+id/big_file_size"
+                        style="@style/clearTextStyle"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/px20"
+                        android:drawableRight="@drawable/clean_more"
+                        android:text="42MB"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/software_last"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/big_file"
+                    android:layout_marginBottom="@dimen/px10"
+                    android:layout_marginTop="@dimen/px10"
+                    android:background="@drawable/clear_item_selecter_bg"
+                    android:nextFocusDown="@+id/empty_folder">
+
+                    <TextView
+                        android:id="@+id/software_last_lable"
+                        style="@style/clearTextStyle"
+                        android:text="@string/software_last"
+                        />
+
+                    <TextView
+                        android:id="@+id/software_last_count"
+                        style="@style/clearTextStyle"
+                        android:layout_toRightOf="@+id/software_last_lable"
+                        android:text="@string/clear_count"
+                        android:visibility="gone"
+                        />
+
+
+                    <ProgressBar
+                        android:id="@+id/software_last_progress"
+                        android:layout_width="@dimen/px25"
+                        android:layout_height="@dimen/px25"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/px20"/>
+
+                    <TextView
+                        android:id="@+id/software_last_size"
+                        style="@style/clearTextStyle"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/px20"
+                        android:drawableRight="@drawable/clean_more"
+                        android:text="42MB"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/empty_folder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/software_last"
+                    android:layout_marginBottom="@dimen/px10"
+                    android:layout_marginTop="@dimen/px10"
+                    android:background="@drawable/clear_item_selecter_bg"
+                    android:nextFocusDown="@+id/thumb">
+
+                    <TextView
+                        android:id="@+id/empty_folder_lable"
+                        style="@style/clearTextStyle"
+                        android:text="@string/empty_folder"
+                        />
+
+                    <TextView
+                        android:id="@+id/empty_folder_count"
+                        style="@style/clearTextStyle"
+                        android:layout_toRightOf="@+id/empty_folder_lable"
+                        android:text="@string/clear_count"
+                        android:visibility="gone"
+                        />
+
+
+                    <ProgressBar
+                        android:id="@+id/empty_folder_progress"
+                        android:layout_width="@dimen/px25"
+                        android:layout_height="@dimen/px25"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/px20"/>
+
+                    <TextView
+                        android:id="@+id/empty_folder_size"
+                        style="@style/clearTextStyle"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/px20"
+                        android:drawableRight="@drawable/clean_more"
+                        android:text="42MB"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/thumb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/empty_folder"
+                    android:layout_marginBottom="@dimen/px10"
+                    android:layout_marginTop="@dimen/px10"
+                    android:background="@drawable/clear_item_selecter_bg">
+
+                    <TextView
+                        android:id="@+id/thumb_lable"
+                        style="@style/clearTextStyle"
+                        android:text="@string/thumb"
+                        />
+
+                    <TextView
+                        android:id="@+id/thumb_count"
+                        style="@style/clearTextStyle"
+                        android:layout_toRightOf="@+id/thumb_lable"
+                        android:text="@string/clear_count"
+                        android:visibility="gone"
+                        />
+
+
+                    <ProgressBar
+                        android:id="@+id/thumb_progress"
+                        android:layout_width="@dimen/px25"
+                        android:layout_height="@dimen/px25"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/px20"/>
+
+                    <TextView
+                        android:id="@+id/thumb_size"
+                        style="@style/clearTextStyle"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/px20"
+                        android:drawableRight="@drawable/clean_more"
+                        android:text="42MB"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <ListView
+            android:id="@+id/content_l"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/clear_total_count"
+            android:layout_marginTop="@dimen/px20"
+            android:layout_marginBottom="@dimen/px20"
+            android:cacheColorHint="#00000000"
+            android:listSelector="#00000000"
+            android:visibility="gone"
+            />
+
+    </FrameLayout>
+
+    <View
+        android:id="@+id/bottom_div"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/clear_dividing_line"/>
+
+</RelativeLayout>

@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/bg"
+              android:orientation="vertical"
+              android:paddingTop="@dimen/activity_vertical_margin">
+
+    <include
+        android:id="@+id/statu"
+        layout="@layout/status_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px130"
+        android:layout_marginTop="@dimen/px10"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/px150"
+        android:layout_marginRight="@dimen/px150"
+        android:layout_marginTop="@dimen/px100"
+        android:orientation="vertical">
+
+        <!-- tetherSwitch -->
+        <LinearLayout
+            android:id="@+id/tetherSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/radio_button_background_light"
+            android:clickable="true"
+            android:focusable="true"
+            android:nextFocusLeft="@+id/btn_tethering_id"
+            android:nextFocusUp="@+id/tetherSwitch"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="@string/wifi_tether_checkbox_text"
+                android:textColor="@color/zx_color3"
+                android:textSize="24sp"/>
+
+            <TextView
+                android:id="@+id/tetherSwitch_summary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="22sp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <Switch
+                android:id="@+id/tetherSwitch_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:clickable="false"
+                android:focusable="false"/>
+        </LinearLayout>
+        <!-- tetherSwitch -->
+
+        <!-- tetherConfig -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="@string/wifi_tether_config_summary"
+                android:textColor="@color/zx_color3"
+                android:textSize="24sp"/>
+
+            <TextView
+                android:id="@+id/tetherConfig_summary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="22sp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/tetherConfig_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/sel_button_focus"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:nextFocusLeft="@+id/btn_tethering_id"
+                android:paddingBottom="2dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="2dp"
+                android:text="@string/wifi_tether_config_button"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/tetherConfig_openmark"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.TileTitle"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+        </LinearLayout>
+        <!-- tetherConfig -->
+
+        <!-- component: wifi_ap_dialog.xml -->
+        <LinearLayout
+            android:id="@+id/tetherCon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:visibility="gone">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="1dp"
+                android:background="?android:attr/dividerVertical"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wifi_ap_hotspot_title"
+                    android:textColor="@color/zx_color3"
+                    android:textSize="24sp"/>
+
+                <EditText
+                    android:id="@+id/wifi_ap_ssid"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:background="@color/white"
+                    android:clickable="true"
+                    android:cursorVisible="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/wifi_ssid_hint"
+                    android:imeOptions="actionDone"
+                    android:inputType="textVisiblePassword"
+                    android:maxLength="32"
+                    android:maxLines="1"
+                    android:nextFocusLeft="@id/wifi_ap_ssid"
+                    android:nextFocusRight="@id/wifi_ap_ssid"
+                    android:nextFocusUp="@id/tetherConfig_button"
+                    android:paddingLeft="2dp"
+                    android:textColor="@color/listMenuFocusColor"
+                    android:textColorHint="@color/zx_color2"
+                    android:textSize="24sp"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wifi_ap_hotspot_hint"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginTop="30dp"
+                android:text="@string/wifi_ap_security_title"
+                android:textColor="@color/zx_color3"
+                android:textSize="24sp"/>
+
+            <RadioGroup
+                android:id="@+id/wifi_ap_security_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/wifi_ap_security_open"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/radio_button_background_light"
+                    android:nextFocusLeft="@id/wifi_ap_security_open"
+                    android:nextFocusRight="@id/wifi_ap_security_open"
+                    android:paddingLeft="50dp"
+                    android:text="@string/wifi_ap_security_open_text"
+                    android:textColor="@color/zx_color3"/>
+
+                <RadioButton
+                    android:id="@+id/wifi_ap_security_wpa_psk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/radio_button_background_light"
+                    android:nextFocusLeft="@id/wifi_ap_security_wpa_psk"
+                    android:nextFocusRight="@id/wifi_ap_security_wpa_psk"
+                    android:paddingLeft="50dp"
+                    android:text="@string/wifi_ap_security_wpa_psk_text"
+                    android:textColor="@color/zx_color3"/>
+
+                <RadioButton
+                    android:id="@+id/wifi_ap_security_wpa2_psk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/radio_button_background_light"
+                    android:nextFocusLeft="@id/wifi_ap_security_wpa2_psk"
+                    android:nextFocusRight="@id/wifi_ap_security_wpa2_psk"
+                    android:paddingLeft="50dp"
+                    android:text="@string/wifi_ap_security_wpa2_psk_text"
+                    android:textColor="@color/zx_color3"/>
+            </RadioGroup>
+
+            <LinearLayout
+                android:id="@+id/wifi_ap_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/wifi_ap_password_confirm_title"
+                        android:textColor="@color/zx_color3"
+                        android:textSize="24sp"/>
+
+                    <EditText
+                        android:id="@+id/wifi_ap_password_icicle"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:background="@color/white"
+                        android:clickable="true"
+                        android:cursorVisible="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:maxLength="63"
+                        android:maxLines="1"
+                        android:nextFocusLeft="@id/wifi_ap_password_icicle"
+                        android:nextFocusRight="@id/wifi_ap_password_icicle"
+                        android:paddingLeft="2dp"
+                        android:textColor="@color/listMenuFocusColor"
+                        android:textColorHint="@color/zx_color2"
+                        android:textSize="24sp"/>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/credentials_password_too_short"
+                        android:textColor="@color/zx_b3aeae"
+                        android:textSize="24sp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/wifi_ap_password_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/wifi_ap_password_confirm_title"
+                        android:textColor="@color/zx_color3"
+                        android:textSize="24sp"/>
+
+                    <EditText
+                        android:id="@+id/wifi_ap_password_confirm_icicle"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:background="@color/white"
+                        android:clickable="true"
+                        android:cursorVisible="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:maxLength="63"
+                        android:maxLines="1"
+                        android:nextFocusLeft="@id/wifi_ap_password_confirm_icicle"
+                        android:nextFocusRight="@id/wifi_ap_password_confirm_icicle"
+                        android:paddingLeft="2dp"
+                        android:textColor="@color/listMenuFocusColor"
+                        android:textColorHint="@color/zx_color2"
+                        android:textSize="24sp"/>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/wifi_ap_ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/clear_button"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:nextFocusDown="@id/wifi_ap_ok"
+                    android:nextFocusLeft="@id/wifi_ap_ok"
+                    android:nextFocusRight="@id/wifi_ap_ok"
+                    android:paddingBottom="3dp"
+                    android:paddingLeft="18dp"
+                    android:paddingRight="18dp"
+                    android:paddingTop="3dp"
+                    android:text="@string/wifi_ap_ok"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+        </LinearLayout>
+        <!-- component: wifi_ap_dialog.xml -->
+    </LinearLayout>
+</LinearLayout>

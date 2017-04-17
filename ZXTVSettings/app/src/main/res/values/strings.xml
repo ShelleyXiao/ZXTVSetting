@@ -1,0 +1,320 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">ZXTVSettings</string>
+    <string name="net_setitng_title">网络设置</string>
+    <string name="wifi_setting">无线网络</string>
+    <string name="ethernet_setting">有线网络</string>
+    <string name="bluetooth_setting">蓝牙</string>
+    <string name="net_speed_test">网络测速</string>
+    <string name="net_soft_ap">共享热点</string>
+    <string name="display_setting">显示模式</string>
+
+    <string name="wifi_connected">已连接</string>
+    <string name="wifi_switch_on">打开WIFI</string>
+    <string name="wifi_switch_off">关闭WIFI</string>
+
+    <string name="wifi_connect_name">(当前连接到 %s )</string>
+
+
+    <string name="toastFailed">失败！</string>
+    <string name="buttonOp">更多……</string>
+
+    <!-- Button label to connect to a wifi network-->
+    <string name="connect">连接</string>
+    <!--  !!!!!!!! vpn_connect_toTitle of VPN connect dialog -->
+    <string name="wifi_connect_to">连接到 %s</string>
+    <!-- Wi-Fi IP addrress label -->
+    <string name="ip_address">IP 地址</string>
+    <!-- Label for the signal strength -->
+    <string name="signal">信号强度</string>
+
+    <!-- Button caption to forget a wifi network -->
+    <string name="forget_network">不保存</string>
+    <!-- Label for status of connection -->
+    <string name="wifi_status">状态</string>
+    <!--Wi-Fi settings screen, summary text for network when connected -->
+    <string name="status_connected">已连接</string>
+    <string name="status_connecting">正在连接……</string>
+    <!-- Label for link speed (wifi) -->
+    <string name="wifi_link_speed">速度</string>
+    <!-- Verbose wifi signal strength.  This is the best out of 4 levels. -->
+    <string name="wifi_signal_3">最强</string>
+    <!-- Verbose wifi signal strength.  This is the 2nd best out of 4 levels. -->
+    <string name="wifi_signal_2">正常</string>
+    <!-- Verbose wifi signal strength.  This is the 3rd best out of 4 levels. -->
+    <string name="wifi_signal_1">较弱</string>
+    <!-- Verbose wifi signal strength.  This is the worst out of 4 levels. -->
+    <string name="wifi_signal_0">弱</string>
+    <!-- Label for the security of a wifi network -->
+    <string name="security">安全性</string>
+    <!-- Value for the wifi security.  This means no encryption. -->
+    <string name="wifi_security_open">开放</string>
+
+    <string name="please_type_passphrase">密码</string>
+    <string name="wifi_show_password">显示密码。</string>
+
+    <string name="wifi_change_password">修改密码</string>
+    <string name="button_change_password">修改密码</string>
+    <!-- An edit field's grayed out value when it has not been modified -->
+    <string name="wifi_password_unchanged">（未更改）</string>
+    <!-- Button caption to save a configuration wifi -->
+    <string name="wifi_save_config">保存</string>
+
+    <string name="adhoc_not_supported_yet">Android 平台目前不支持连接到 AdHoc！</string>
+
+    <string name="wifi_state_closed">WIFI网卡未打开！</string>
+    <string name="wifi_state_opened">WIFI网卡已打开！</string>
+    <string name="wifi_state_unknowed">WIFI网卡状态未知</string>
+    <string name="wifi_open_msg">"请开启WIFI!"</string>
+    <string name="wifi_scan_msg">"正在扫描附近的WIFI..."</string>
+    <string name="wifi_close_msg">WIFI已关闭</string>
+    <string name="wifi_nearby">附近WIFI</string>
+    <string name="wifi_error">"出错"</string>
+
+    <!-- Do not translate.  Concise terminology for wifi with WEP security -->
+    <string name="wifi_security_short_wep">WEP</string>
+    <!-- Do not translate.  Concise terminology for wifi with WPA security -->
+    <string name="wifi_security_short_wpa">WPA</string>
+    <!-- Do not translate.  Concise terminology for wifi with WPA2 security -->
+    <string name="wifi_security_short_wpa2">WPA2</string>
+    <!-- Do not translate.  Concise terminology for wifi with both WPA/WPA2 security -->
+    <string name="wifi_security_short_wpa_wpa2">WPA/WPA2</string>
+    <!-- Do not translate.  Concise terminology for wifi with unknown PSK type -->
+    <string name="wifi_security_short_psk_generic">@string/wifi_security_short_wpa_wpa2</string>
+    <!-- Do not translate.  Concise terminology for wifi with 802.1x EAP security -->
+    <string name="wifi_security_short_eap">802.1x</string>
+
+    <!-- Used in Wi-Fi settings dialogs when Wi-Fi does not have any security. -->
+    <string name="wifi_security_none">None</string>
+
+    <!-- Do not translate.  Terminology for wifi with WEP security -->
+    <string name="wifi_security_wep">WEP</string>
+    <!-- Do not translate.  Terminology for wifi with WPA security -->
+    <string name="wifi_security_wpa">WPA PSK</string>
+    <!-- Do not translate.  Terminology for wifi with WPA2 security -->
+    <string name="wifi_security_wpa2">WPA2 PSK</string>
+    <!-- Do not translate.  Terminology for wifi with both WPA/WPA2 security, or unknown -->
+    <string name="wifi_security_wpa_wpa2">WPA/WPA2 PSK</string>
+    <!-- Do not translate.  Terminology for wifi with unknown PSK type -->
+    <string name="wifi_security_psk_generic">@string/wifi_security_wpa_wpa2</string>
+    <!-- Do not translate.  Concise terminology for wifi with 802.1x EAP security -->
+    <string name="wifi_security_eap">802.1x EAP</string>
+
+    <!-- tethering set part -->
+    <string name="wifi_tether_configure_ssid_default">"热点ID"</string>
+    <string name="wifi_tether_enabled_subtext">"WIFI热点“<xliff:g id="NETWORK_SSID">%1$s</xliff:g>”已激活"</string>
+    <string name="wifi_tether_starting">"正在打开热点..."</string>
+    <string name="wifi_tether_stopping">"正在关闭热点..."</string>
+    <string name="wifi_tether_checkbox_text">"WIFI热点"</string>
+    <string name="wifi_tether_config_summary">配置热点</string>
+    <string name="wifi_tether_config_button">配置</string>
+    <string name="wifi_ap_hotspot_title">"热点名称:"</string>
+    <string name="wifi_ssid_hint">输入SSID</string>
+    <string name="wifi_ap_hotspot_hint">""</string>
+    <string name="wifi_ap_password_title">"输入密码:"</string>
+    <string name="wifi_ap_password_confirm_title">"确认密码:"</string>
+    <string name="credentials_password_too_short">"密码至少应包含8个字符。"</string>
+    <string name="wifi_ap_ok">完成</string>
+    <string name="wifi_ap_config_err_msg_ssid">"请输入正确的SSID!"</string>
+    <string name="wifi_ap_config_err_msg_pwd_short">"密码太短!\n请输入至少8位密码"</string>
+    <string name="wifi_ap_config_err_msg_pwd_match">"密码输入不一致!"</string>
+
+    <string name="wifi_ap_security_open_text">@string/wifi_security_none</string>
+    <string name="wifi_ap_security_wpa_psk_text">@string/wifi_security_wpa</string>
+    <string name="wifi_ap_security_wpa2_psk_text">@string/wifi_security_wpa2</string>
+    <string name="wifi_ap_security_title">"加密类型:"</string>
+
+
+    <!--fastset part -->
+    <string name="fastset_desp">快速设置状态下，系统将会自动配置有线网络</string>
+    <string name="fastset_detectwire">请检查网线已经插入</string>
+    <string name="fastset_start">开始</string>
+    <string name="fastset_detecting">网络自动配置中，请稍后...</string>
+    <string name="fastsetconfigfail_finish">完成</string>
+    <string name="fastsetconfigfail_finish_info">网络配置失败！</string>
+
+    <string name="fastsetresult_netconfig">网络配置成功</string>
+    <string name="fastsetresult_ipaddress">IP 地址:</string>
+    <string name="fastsetresult_netmask">子网掩码:</string>
+    <string name="fastsetresult_gateway">家庭网关:</string>
+    <string name="fastsetresult_dns">DNS服务器:</string>
+    <string name="fastsetresult_dot">.</string>
+    <string name="fastsetresult_ip_1">195</string>
+    <string name="fastsetresult_ip_2">168</string>
+    <string name="fastsetresult_ip_3">1</string>
+    <string name="fastsetresult_ip_4">255</string>
+    <string name="fastsetresult_mask_1">255</string>
+    <string name="fastsetresult_mask_2">255</string>
+    <string name="fastsetresult_mask_3">255</string>
+    <string name="fastsetresult_mask_4">0</string>
+    <string name="fastsetresult_gate_1">192</string>
+    <string name="fastsetresult_gate_2">168</string>
+    <string name="fastsetresult_gate_3">1</string>
+    <string name="fastsetresult_gate_4">1</string>
+    <string name="fastsetresult_dns_1">192</string>
+    <string name="fastsetresult_dns_2">168</string>
+    <string name="fastsetresult_dns_3">1</string>
+    <string name="fastsetresult_dns_4">1</string>
+
+    <!--newstatedetect fragment part -->
+    <string name="netstatedetect_back">返回</string>
+    <string name="netstatedetect_startdetect">开始检测</string>
+    <string name="netstatedetect_repeatdetect">重新检测</string>
+    <string name="netstatedetect_homenetype">家庭网络:</string>
+    <string name="netstatedetect_typeethernet">有线</string>
+    <string name="netstatedetect_typewifi">无线</string>
+    <string name="netstatedetect_Internetconnect">互联网接入:</string>
+    <string name="netstatedetect_connected">接入正常</string>
+    <string name="netstatedetect_detecting">检测中...</string>
+    <string name="netstatedetect_home_disconnect_info">无法连接家庭网络，请检查有线或无线设置</string>
+    <string name="netstatedetect_internet_disconnect_info">无法连接到互联网,请确认互联网连接是否正常，或咨询网络运营商</string>
+    <string name="netstatedetect_tv_disconnect_info">无法连接到百视通服务，请稍后再试</string>
+
+    <!-- ethernet set part-->
+    <string name="ethernet_title">有线设置</string>
+
+    <string name="ethernet_autodetect">网络自动配置中，请稍后 ...</string>
+    <string name="ethernet_mandetect">网络配置中，请稍后 ...</string>
+    <string name="ethernet_configtitle">遥控器输入\'\#\'键删除</string>
+    <string name="ethernet_laststep">上一步</string>
+    <string name="ethernet_finish">完成</string>
+    <string name="ethernetconfigfail_finish_info">网络配置失败！</string>
+
+
+    <string name="ethernet_ipaddress">IP 地址:</string>
+    <string name="ethernet_netmask">子网掩码:</string>
+    <string name="ethernet_gateway">家庭网关:</string>
+    <string name="ethernet_dns1">DNS1服务器:</string>
+    <string name="ethernet_dns2">DNS2服务器:</string>
+    <string name="ethernet_dot">.</string>
+
+    <string name="ethernet_ipconfig_1">192</string>
+    <string name="ethernet_ipconfig_2">168</string>
+    <string name="ethernet_ipconfig_3">1</string>
+    <string name="ethernet_ipconfig_4">125</string>
+    <string name="ethernet_maskconfig_1">255</string>
+    <string name="ethernet_maskconfig_2">255</string>
+    <string name="ethernet_maskconfig_3">255</string>
+    <string name="ethernet_maskconfig_4">0</string>
+    <string name="ethernet_gateconfig_1">192</string>
+    <string name="ethernet_gateconfig_2">168</string>
+    <string name="ethernet_gateconfig_3">1</string>
+    <string name="ethernet_gateconfig_4">1</string>
+    <string name="ethernet_dns1config_1">192</string>
+    <string name="ethernet_dns1config_2">168</string>
+    <string name="ethernet_dns1config_3">1</string>
+    <string name="ethernet_dns1config_4">1</string>
+    <string name="ethernet_dns2config_1">192</string>
+    <string name="ethernet_dns2config_2">168</string>
+    <string name="ethernet_dns2config_3">1</string>
+    <string name="ethernet_dns2config_4">1</string>
+
+    <string name="ethernet_configtypestring">网络配置方式</string>
+    <string name="ethernet_configautostring">网络自动获取</string>
+    <string name="ethernet_configmanstring">网络手动设置</string>
+    <string name="ethernet_configpppoe">PPPoE 配置</string>
+    <string name="ethernet_configstart">开始</string>
+    <string name="ethernet_confignotify">使用前请检查网线是否正常连接</string>
+
+
+    <string name="bluetooth_setting_title">蓝牙设置</string>
+    <string name="bluetooth_openning">开启蓝牙</string>
+    <string name="bluetooth_open_conect">开放检测</string>
+
+    <string name="bluetooth_not_conected">未配对</string>
+    <string name="bluetooth_connect_cancel">取消配对</string>
+    <string name="bluetooth_connect_cancel_failed">取消配对失败</string>
+    <string name="bluetooth_connect_canceling">正在取消配对..</string>
+    <string name="bluetooth_scan_device">搜索设备</string>
+    <string name="bluetooth_scan_title">搜索到的设备</string>
+    <string name="bluetooth_connected_device">可配对的设备</string>
+    <string name="bluetooth_connectting">正在配对</string>
+    <string name="bluetooth_connected">配对完成</string>
+    <string name="bluetooth_disabled">配对完成</string>
+
+    <string name="net_state_connected">网络已连接</string>
+    <string name="net_state_disconnected">网络已断开</string>
+
+    <string name="net_speed_test_precent">已完成</string>
+    <string name="net_speed_test_waiting">正在进行网络测速,请稍后...</string>
+    <string name="net_speed_test_btn_start">开始测速</string>
+    <string name="net_speed_test_btn_stop">停止测速</string>
+    <string name="net_speed_test_btn_again">再次测速</string>
+    <string name="net_speed_test_result">本次测速结果:  网速</string>
+    <string name="net_speed_test_result_promat">你当前网速适合观看</string>
+    <string name="net_speed_test_start_promat">网络测速 为您测速最佳网速</string>
+    
+
+    <string name="app_uninstall_title">应用卸载</string>
+    <string name="app_uninstall">卸载</string>
+
+    <string name="about_device_name">型号:</string>
+    <string name="about_device_version">Android版本:</string>
+    <string name="about_device_android">版本号:</string>
+    <string name="about_device_mac">MAC地址:</string>
+    <string name="about_device_ip">IP地址:</string>
+
+    <string name="garbage_clear_scanning_text">正在扫描</string>
+    <string name="garbage_clear_scaned_text">扫描完成</string>
+
+    <array name="speed_level">
+        <item>普清电影</item>
+        <item>高清电影</item>
+        <item>超清电影</item>
+    </array>
+
+    <string name="garbage_clear_able">可清理的垃圾有：</string>
+    <string name="system_cache">系统缓存</string>
+    <string name="sdcard_clear">SD卡清理</string>
+    <string name="empty_folder">空文件夹</string>
+    <string name="temp_file">临时文件</string>
+    <string name="thumb">缩略图</string>
+    <string name="software_last">软件残留</string>
+    <string name="other_check">其他检测</string>
+    <string name="apk_zip">无用APK安装包</string>
+    <string name="big_file">大文件</string>
+    <string name="fast_clear">一键清理</string>
+    <string name="stop_clear">停止清理</string>
+    <string name="cache">缓存</string>
+    <string name="clear">清理</string>
+    <string name="title_total">共</string>
+    <string name="title_file">个文件</string>
+    <string name="title_used">占</string>
+    <string name="title_room">空间</string>
+    <string name="unknown">未知</string>
+    <string name="clear_warn">APK和大文件，请慎重勾选</string>
+
+
+
+    <string name="clear_over">清理完毕</string>
+    <string name="clear_success">清理成功</string>
+    <string name="clearing">正在清理</string>
+    <string name="clearing_stop">停止清理</string>
+    <string name="clear_no_data">没有可清理的数据！</string>
+    <string name="clear_select">请先选择需要删除的内容！</string>
+    <string name="clear_clear">删除中#8230</string>
+    <string name="install_success">安装成功</string>
+    <string name="clear_title_defalut">共有0个文件，占0B空间</string>
+
+    <string name="clear_total_count">共扫描到 %1$d 项</string>
+    <string name="clear_count">( %1$d )</string>
+
+    <string name="root_path_text">SDcard</string>
+
+    <string name="clear_start">开始清理</string>
+    <string name="clear_scan_again">再次扫描</string>
+
+    <!-- display mode -->
+    <string name="title_display_mode">视频信号输出</string>
+    <string name="display_mode_radiobutton_null">未知视频模式</string>
+
+    <!-- display area -->
+    <string name="display_area_desc">电视屏幕边缘的文字、图像显示不完全时，您可以使用<b>\"显示区域调整\"</b>，调整页面显示的位置，方向键上、下、左、右微调，使屏幕居中显示</string>
+    <string name="display_area_btn_desc">显示区域调整</string>
+    <string name="display_area_control_desc">・ 按<b>确认</b>键切换<b>放大</b>/<b>缩小</b>\n・ 按方向键调整屏幕四个边的位置\n・ 按<b>返回</b>键保存</string>
+    <string name="area_switch_button_expand"><b>放大</b></string>
+    <string name="area_switch_button_shrink"><b>缩小</b></string>
+
+    <string name="setting">设置</string>
+    <string name="netsetting">网络</string>
+
+</resources>

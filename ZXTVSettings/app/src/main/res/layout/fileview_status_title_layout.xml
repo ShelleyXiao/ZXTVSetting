@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/zx_logo"
+        android:layout_width="@dimen/px170"
+        android:layout_height="@dimen/px87"
+        android:gravity="center_vertical|center_horizontal"
+        android:src="@drawable/logonew"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/px15" />
+
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:layout_marginLeft="@dimen/px15"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/title_file_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:textColor="#c3719fbe"
+        android:textSize="32sp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/px25"
+        android:layout_toRightOf="@+id/title"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/search_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:textSize="25sp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/title_file_num"
+        android:visibility="gone"/>
+
+    <FrameLayout android:id="@+id/serarh_input"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/px50"
+        android:layout_marginRight="@dimen/px50"
+        android:layout_toRightOf="@+id/search_category"
+        android:layout_toLeftOf="@+id/home_networkstate"
+        android:visibility="gone">
+
+
+        <EditText
+            android:id="@+id/input"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:singleLine="true"
+            android:textColor="#ffffffff"
+            android:textCursorDrawable="@null"
+            android:textSize="18.0sp" />
+    </FrameLayout>
+
+
+
+    <TextView
+        android:id="@+id/title_time_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="14:50:10"
+        android:textColor="#ffffff"
+        android:textSize="25sp"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentRight="true" />
+
+    <ImageView
+        android:id="@+id/home_networkstate"
+        android:layout_width="40dp"
+        android:layout_height="60dip"
+        android:gravity="center_vertical|center_horizontal"
+        android:src="@drawable/networkstate_off"
+        android:textColor="#ffffff"
+        android:textSize="30sp"
+        android:layout_toLeftOf="@id/title_time_hour"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="10dp" />
+
+</RelativeLayout>

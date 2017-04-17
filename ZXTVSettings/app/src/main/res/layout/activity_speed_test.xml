@@ -1,0 +1,224 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg">
+
+    <include
+        android:id="@+id/statu"
+        layout="@layout/status_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px130"
+        android:layout_marginTop="@dimen/px10"
+        />
+
+    <View
+        android:id="@+id/status_back"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:background="@drawable/tran"
+        android:visibility="invisible"/>
+
+
+    <FrameLayout
+        android:id="@+id/speed_test_fl"
+        android:layout_width="800dp"
+        android:layout_height="@dimen/px750"
+        android:layout_centerInParent="true"
+        android:background="@drawable/wifi_listitem_bg">
+
+        <LinearLayout
+            android:id="@+id/speedtset_didinotlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="网络测速 为您测速最佳网速"
+                android:textColor="#AAAAAA"
+                android:textSize="35sp"/>
+
+            <Button
+                android:id="@+id/speedtest_btn_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/btn_finishclear"
+                android:text="@string/net_speed_test_btn_start"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/speedtest_instartlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/speed_test_promat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/px10"
+                    android:text="@string/net_speed_test_start_promat"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30sp"/>
+
+                <TextView
+                    android:id="@+id/speed_test_percent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/speed_test_promat"
+                    android:textColor="#FFFFFF"
+                    android:textSize="35sp"/>
+
+            </RelativeLayout>
+
+            <!--
+                        <ProgressBar
+                            android:id="@+id/speedtest_progressBar"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="match_parent"
+                            android:layout_marginLeft="50dp"
+                            android:layout_marginRight="50dp"
+                            android:progressDrawable="@drawable/progress_bg"
+                            android:layout_height="wrap_content"
+                            android:max="100" />
+
+                             -->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/tester"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/bg_tester"/>
+
+                <ImageView
+                    android:id="@+id/needle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/heart"
+                    android:layout_alignRight="@+id/heart"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginRight="13dp"
+                    android:src="@drawable/ic_needle"/>
+
+                <ImageView
+                    android:id="@+id/heart"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_alignBottom="@id/tester"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="11dp"
+                    android:src="@drawable/ic_heart"/>
+            </RelativeLayout>
+
+
+            <Button
+                android:id="@+id/speedtset_btn_stoptest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/px25"
+                android:background="@drawable/btn_finishclear"
+                android:text="@string/net_speed_test_btn_start"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/speedtest_startagainlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/net_speed_test_result"
+                    android:textColor="#FFFFFF"
+                    android:textSize="35sp"/>
+
+                <TextView
+                    android:id="@+id/speedtest_speed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFCC22"
+                    android:textSize="35sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/net_speed_test_result_promat"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30sp"/>
+
+                <TextView
+                    android:id="@+id/speed_movietype"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="高清影片"
+                    android:textColor="#FFCC22"
+                    android:textSize="30sp"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/speedtest_btn_startagain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/btn_finishclear"
+                android:text="@string/net_speed_test_btn_again"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"/>
+        </LinearLayout>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/nandb_tittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/speed_test_fl"
+        android:layout_alignStart="@id/speed_test_fl"
+        android:layout_marginBottom="30dp"
+        android:text="网络测速"
+        android:textColor="@color/white"
+        android:textSize="35sp"/>
+
+</RelativeLayout>

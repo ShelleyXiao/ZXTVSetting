@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="@dimen/px220"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/px90"
+        android:scaleType="fitCenter"
+        android:src="@drawable/logonew"/>
+
+    <TextView
+        android:id="@+id/time_statu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/px90"
+        android:gravity="center_vertical"
+        android:textColor="@color/time_statu"
+        android:textSize="@dimen/px56"/>
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginRight="@dimen/px5"
+        android:layout_toLeftOf="@id/time_statu"
+        android:gravity="center_vertical"
+        android:textColor="@color/white"
+        android:textSize="@dimen/px56"/>
+
+    <View
+        android:id="@+id/div"
+        android:layout_width="@dimen/px2"
+        android:layout_height="@dimen/px50"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/px15"
+        android:layout_toLeftOf="@id/time"
+        android:alpha="0.6"
+        android:background="@color/zx_blue"/>
+
+    <LinearLayout
+        android:id="@+id/net"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/px80"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/px20"
+        android:layout_toLeftOf="@id/div"
+        android:background="@drawable/bar_selector"
+        android:clickable="true"
+        android:descendantFocusability="blocksDescendants"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal"
+        android:paddingRight="@dimen/px2">
+
+        <ImageView
+            android:id="@+id/net_statu"
+            android:layout_width="@dimen/px80"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:scaleType="fitCenter"
+            android:src="@drawable/eth_selector"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/netsetting"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/set"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/px72"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/px3"
+        android:layout_toLeftOf="@id/net"
+        android:background="@drawable/bar_selector"
+        android:clickable="true"
+        android:descendantFocusability="blocksDescendants"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal"
+        android:paddingRight="@dimen/px2"
+        android:visibility="invisible">
+
+        <ImageView
+            android:id="@+id/set_statu"
+            android:layout_width="@dimen/px72"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:scaleType="fitCenter"
+            android:src="@drawable/set_selector"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/setting"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+</RelativeLayout>

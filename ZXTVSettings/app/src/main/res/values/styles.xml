@@ -1,0 +1,63 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+
+        <item name="android:windowContentTransitions">true</item>
+
+        <item name="android:windowBackground">@drawable/bg</item>
+    </style>
+
+    <style name="switchStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">30dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingRight">30dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="android:drawablePadding">16dp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="PlatformDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@android:color/transparent</item><!--边框-->
+        <item name="android:windowIsFloating">true</item><!--是否浮现在activity之上-->
+        <item name="android:windowIsTranslucent">true</item><!--半透明-->
+        <item name="android:windowNoTitle">true</item><!--无标题-->
+        <item name="android:windowBackground">@android:color/transparent</item><!--背景透明-->
+    </style>
+
+    <style name="textAppearanceBaseContent" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@android:color/secondary_text_dark</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="aboutTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#dadada</item>
+        <item name="android:padding">@dimen/px10</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:singleLine">true</item>
+
+
+    </style>
+
+    <style name="clearTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#dadada</item>
+        <item name="android:padding">@dimen/px10</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:focusable">false</item>
+    </style>
+
+    <style name="TextAppearance.TileTitle" parent="@android:style/TextAppearance.Material.Medium"></style>
+
+
+</resources>

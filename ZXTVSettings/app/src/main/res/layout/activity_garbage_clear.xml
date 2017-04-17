@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/bg"
+              android:orientation="vertical">
+
+    <com.zx.zxtvsettings.view.ViewStatusTitleView
+        android:id="@+id/status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px60"
+        android:layout_margin="@dimen/px20"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px800"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/px100"
+            android:layout_weight="1"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/px584"
+                android:layout_height="@dimen/px584"
+                android:layout_gravity="center"
+                android:src="@drawable/clean_bg_cycle"/>
+
+            <ImageView
+                android:id="@+id/clean_progress_big"
+                android:layout_width="@dimen/px584"
+                android:layout_height="@dimen/px584"
+                android:layout_gravity="center"
+                android:src="@drawable/clean_big_cycle"/>
+
+            <ImageView
+                android:id="@+id/clean_progress_small"
+                android:layout_width="@dimen/px490"
+                android:layout_height="@dimen/px490"
+                android:layout_gravity="center"
+                android:src="@drawable/clean_small_cycle"/>
+
+            <TextView
+                android:id="@+id/scan_state_display"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/garbage_clear_scanning_text"
+                android:textColor="#cfcccc"
+                android:textSize="48sp"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/px100"
+            android:layout_marginLeft="@dimen/px50"
+            android:layout_marginRight="@dimen/px50"
+            android:layout_marginTop="@dimen/px50"
+            android:layout_weight="1"
+            android:nextFocusDown="@+id/btn_clear"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/px25"
+        android:background="@drawable/clear_button"
+        android:text="@string/clear_start"
+        android:textColor="#fff"
+        android:textSize="24sp"
+        android:visibility="gone"/>
+
+</LinearLayout>

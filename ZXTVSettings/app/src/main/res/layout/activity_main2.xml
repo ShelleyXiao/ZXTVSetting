@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context=".activity.MainActivity">
+
+    <include
+        android:id="@+id/statu"
+        layout="@layout/status_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px130"
+        android:layout_marginTop="@dimen/px10"
+        />
+
+    <HorizontalScrollView
+        android:id="@+id/hscroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/statu"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        >
+
+        <RelativeLayout
+            android:id="@+id/main_lay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:descendantFocusability="afterDescendants"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/setting_net"
+                android:layout_width="@dimen/px480"
+                android:layout_height="@dimen/px310"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/px100"
+                android:layout_marginTop="@dimen/px100"
+                android:src="@drawable/setting_net"
+                android:background="@drawable/sel_main_focus"
+                android:scaleType="fitXY"
+                android:clickable="true"
+                android:focusable="true">
+
+
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/setting_display"
+                android:layout_width="@dimen/px480"
+                android:layout_height="@dimen/px310"
+                android:layout_alignLeft="@+id/setting_net"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/setting_net"
+                android:layout_marginLeft="@dimen/px100"
+                android:layout_marginTop="@dimen/px5"
+                android:src="@drawable/setting_display"
+                android:background="@drawable/sel_main_focus"
+                android:scaleType="fitXY"
+                android:clickable="true"
+                android:focusable="true">
+
+
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/setting_bluethee"
+                android:layout_width="@dimen/px480"
+                android:layout_height="@dimen/px310"
+                android:layout_marginLeft="@dimen/px5"
+                android:layout_marginTop="@dimen/px100"
+                android:layout_toRightOf="@+id/setting_net"
+                android:src="@drawable/setting_bluethee"
+                android:background="@drawable/sel_main_focus"
+                android:scaleType="fitXY"
+                android:clickable="true"
+                android:focusable="true">
+
+
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/setting_uninstall"
+                android:layout_width="@dimen/px480"
+                android:layout_height="@dimen/px310"
+                android:layout_below="@+id/setting_bluethee"
+                android:layout_marginLeft="@dimen/px5"
+                android:layout_marginTop="@dimen/px5"
+                android:layout_toRightOf="@+id/setting_display"
+                android:src="@drawable/setting_uninstall"
+                android:background="@drawable/sel_main_focus"
+                android:scaleType="fitXY"
+                android:clickable="true"
+                android:focusable="true">
+
+
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/setting_more"
+                android:layout_width="@dimen/px480"
+                android:layout_height="@dimen/px310"
+                android:layout_marginLeft="@dimen/px5"
+                android:layout_marginTop="@dimen/px100"
+                android:layout_toRightOf="@+id/setting_bluethee"
+                android:src="@drawable/setting_more"
+                android:background="@drawable/sel_main_focus"
+                android:scaleType="fitXY"
+                android:clickable="true"
+                android:focusable="true">
+
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/setting_about"
+                android:layout_width="@dimen/px480"
+                android:layout_height="@dimen/px310"
+                android:layout_below="@+id/setting_more"
+                android:layout_marginLeft="@dimen/px5"
+                android:layout_marginTop="@dimen/px5"
+                android:layout_toRightOf="@+id/setting_uninstall"
+                android:src="@drawable/setting_about"
+                android:background="@drawable/sel_main_focus"
+                android:scaleType="fitXY"
+                android:clickable="true"
+                android:focusable="true">
+
+
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/setting_clear"
+                android:layout_width="@dimen/px480"
+                android:layout_height="@dimen/px310"
+                android:layout_marginLeft="@dimen/px5"
+                android:layout_marginTop="@dimen/px100"
+                android:layout_toRightOf="@+id/setting_more"
+                android:src="@drawable/setting_clean"
+                android:background="@drawable/sel_main_focus"
+                android:scaleType="fitXY"
+                android:clickable="true"
+                android:focusable="true"
+                android:visibility="gone">
+
+            </ImageButton>
+
+
+        </RelativeLayout>
+
+    </HorizontalScrollView>
+
+    <ImageView
+        android:id="@+id/mainUpView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/health_focus_border"
+        android:scaleType="fitCenter"
+        android:visibility="invisible"/>
+
+
+</RelativeLayout>
