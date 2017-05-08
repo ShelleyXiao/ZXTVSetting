@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:background="@drawable/bg"
-    android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg">
 
     <include
         android:id="@+id/statu"
@@ -14,53 +14,71 @@
 
     <View
         android:id="@+id/status_back"
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@drawable/tran"
         android:visibility="invisible"/>
 
     <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/bluetooth_rl_setting"
+        android:layout_marginTop="80dp"
         android:text="@string/bluetooth_setting_title"
         android:textColor="#fff"
         android:textSize="35sp"
-        android:layout_alignStart="@+id/bluetooth_rl_setting"
-        android:layout_marginTop="80dp" />
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/bluetooth_rl_setting"
+        android:layout_below="@+id/statu"
+        android:layout_marginTop="@dimen/px10"
+        android:layout_marginLeft="@dimen/px5"
+        android:gravity="bottom"
+        android:text="@string/bluetooth_setting_title"
+        android:textColor="#b6b6b6"
+        android:textSize="@dimen/px24"/>
 
     <RelativeLayout
         android:id="@+id/bluetooth_rl_setting"
-        android:layout_width="800dp"
-        android:layout_height="230dp"
+        android:layout_width="@dimen/px1200"
+        android:layout_height="@dimen/px200"
+        android:layout_below="@+id/empty_view"
         android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="150dp"
+        android:background="@drawable/about_bg"
         android:gravity="center"
-        android:background="@drawable/about_bg">
+        android:paddingLeft="@dimen/px30"
+        android:paddingRight="@dimen/px30">
 
         <LinearLayout
-            android:layout_width="500dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_centerInParent="true"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/bluetooth_rl_open"
                 android:layout_width="fill_parent"
-                android:layout_height="60dp"
-                android:gravity="center"
+                android:layout_height="@dimen/px80"
+                android:background="@drawable/sel_focus"
                 android:focusable="true"
-                android:background="@drawable/sel_focus">
+                android:focusableInTouchMode="true"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
                     android:gravity="center"
                     android:text="@string/bluetooth_openning"
-                    android:layout_centerVertical="true"
                     android:textColor="@color/white"
-                    android:textSize="30sp" />
+                    android:textSize="22sp"/>
 
                 <ImageView
                     android:id="@+id/bluetooth_iv_open"
@@ -68,26 +86,39 @@
                     android:layout_height="50dp"
                     android:layout_alignParentRight="true"
                     android:layout_margin="5dp"
-                    android:background="@drawable/switch_on" />
+                    android:background="@drawable/switch_on"
+                    android:visibility="gone"/>
+
+                <com.zx.zxtvsettings.bluetooth.SwitchBar
+                    android:id="@+id/open_switchbar"
+                    android:layout_width="@dimen/px120"
+                    android:layout_height="@dimen/px80"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="@dimen/px10"
+                    android:visibility="visible">
+
+                </com.zx.zxtvsettings.bluetooth.SwitchBar>
+
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/bluetooth_rl_detection"
                 android:layout_width="fill_parent"
-                android:layout_height="60dp"
-                android:gravity="center_vertical"
+                android:layout_height="@dimen/px80"
+                android:background="@drawable/sel_focus"
                 android:focusable="true"
-                android:background="@drawable/sel_focus">
+                android:gravity="center_vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:gravity="center"
                     android:text="@string/bluetooth_open_conect"
-                    android:layout_centerVertical="true"
                     android:textColor="@color/white"
-                    android:textSize="30sp" />
+                    android:textSize="22sp"/>
 
                 <ImageView
                     android:id="@+id/bluetooth_iv_detection"
@@ -95,26 +126,26 @@
                     android:layout_height="50dp"
                     android:layout_alignParentRight="true"
                     android:layout_margin="5dp"
-                    android:background="@drawable/switch_on" />
+                    android:background="@drawable/switch_on"/>
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/bluetooth_rl_search"
-                android:layout_width="fill_parent"
-                android:layout_height="60dp"
-                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px80"
+                android:background="@drawable/sel_focus"
                 android:focusable="true"
-                android:background="@drawable/sel_focus">
+                android:gravity="center_vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:gravity="center"
                     android:text="@string/bluetooth_scan_device"
-                    android:layout_centerVertical="true"
                     android:textColor="@color/white"
-                    android:textSize="30sp" />
+                    android:textSize="22sp"/>
 
                 <ImageView
                     android:id="@+id/bluetooth_iv_search"
@@ -122,7 +153,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_margin="5dp"
-                    android:background="@drawable/rotate" />
+                    android:background="@drawable/rotate"/>
 
             </RelativeLayout>
         </LinearLayout>
@@ -131,53 +162,54 @@
     <TextView
         android:id="@+id/bluetooth_tv_pair"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/bluetooth_rl_setting"
+        android:layout_below="@+id/bluetooth_rl_setting"
         android:gravity="center"
-        android:layout_margin="5dp"
         android:text="@string/bluetooth_connected_device"
         android:textColor="@color/white"
-        android:layout_below="@id/bluetooth_rl_setting"
-        android:layout_alignStart="@id/bluetooth_rl_setting"
-        android:textSize="30sp" />
+        android:textSize="20sp"/>
 
     <RelativeLayout
         android:id="@+id/bluetooth_rl_pair"
-        android:layout_width="800dp"
-        android:layout_height="70dp"
+        android:layout_width="@dimen/px1200"
+        android:layout_height="@dimen/px100"
+        android:layout_below="@id/bluetooth_rl_setting"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:layout_marginTop="60dp"
-        android:layout_below="@id/bluetooth_rl_setting"
-        android:background="@drawable/about_bg">
+        android:layout_marginTop="@dimen/px50"
+        android:background="@drawable/about_bg"
+        android:paddingLeft="@dimen/px30"
+        android:paddingRight="@dimen/px30">
 
         <RelativeLayout
             android:id="@+id/bluetooth_rl_pair1"
-            android:gravity="center_vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:background="@drawable/sel_focus"
             android:focusable="true"
-            android:background="@drawable/sel_focus">
+            android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/bluetooth_tv_pair_name"
                 android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:gravity="center"
+                android:layout_height="wrap_content"
                 android:layout_margin="8dp"
+                android:gravity="center"
                 android:text="@string/bluetooth_not_conected"
                 android:textColor="@color/white"
-                android:textSize="30sp" />
+                android:textSize="22sp"/>
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:gravity="center"
-                android:layout_margin="8dp"
-                android:text="@string/bluetooth_connect_cancel"
+                android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:text="@string/bluetooth_connect_cancel"
                 android:textColor="@color/white"
-                android:textSize="30sp" />
+                android:textSize="22sp"/>
 
         </RelativeLayout>
     </RelativeLayout>
@@ -185,29 +217,34 @@
     <TextView
         android:id="@+id/bluetooth_tv_search_device"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/bluetooth_rl_setting"
+        android:layout_below="@id/bluetooth_rl_pair"
         android:layout_margin="5dp"
+        android:gravity="center"
         android:text="@string/bluetooth_scan_title"
         android:textColor="@color/white"
-        android:layout_below="@id/bluetooth_rl_pair"
-        android:layout_alignStart="@id/bluetooth_rl_setting"
-        android:textSize="30sp" />
+        android:textSize="20sp"/>
 
     <RelativeLayout
         android:id="@+id/bluetooth_rl_search_device"
-        android:layout_width="800dp"
+        android:layout_width="@dimen/px1200"
         android:layout_height="wrap_content"
+        android:layout_below="@id/bluetooth_rl_pair"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:layout_marginTop="60dp"
-        android:layout_below="@id/bluetooth_rl_pair"
-        android:background="@drawable/about_bg">
+        android:layout_marginTop="@dimen/px50"
+        android:background="@drawable/about_bg"
+        android:paddingLeft="@dimen/px30"
+        android:paddingRight="@dimen/px30">
 
         <ListView
             android:id="@+id/bluetooth_lv_search_device"
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="@dimen/px400"
+            android:layout_margin="@dimen/px10"
+            android:layout_marginBottom="@dimen/px15"
+            android:scrollbars="none"/>
 
     </RelativeLayout>
 </RelativeLayout>

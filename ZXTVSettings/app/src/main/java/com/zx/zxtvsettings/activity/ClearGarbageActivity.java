@@ -27,7 +27,7 @@ import java.util.ArrayList;
  * FIXME
  */
 
-public class ClearGarbageActivity extends BaseActivity {
+public class ClearGarbageActivity extends BaseStatusBarActivity {
 
 
     ImageView mCleanProgressBig;

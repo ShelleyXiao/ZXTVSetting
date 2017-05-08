@@ -34,7 +34,6 @@ public class BaseStatusBarActivity extends BaseActivityNew{
 
     private TextView timeTextView, statuTextView;
 
-
     private AppReceiver mAppReceiver;
     private TimeReceiver mTimeReceiver;
     private NetWorkChangeReceiver mNetWorkChangeReceiver;
@@ -95,7 +94,6 @@ public class BaseStatusBarActivity extends BaseActivityNew{
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                // TODO Auto-generated method stub
                 if (hasFocus) {
                     set.getChildAt(1).setVisibility(View.VISIBLE);
                 } else {
@@ -145,7 +143,6 @@ public class BaseStatusBarActivity extends BaseActivityNew{
 
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                // TODO Auto-generated method stub
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     switch (keyCode) {
                         case KeyEvent.KEYCODE_DPAD_DOWN:

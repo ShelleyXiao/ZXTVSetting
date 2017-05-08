@@ -76,6 +76,9 @@ public class SpeedTestActivity extends BaseStatusBarActivity implements View.OnC
                 case PROGRESSCHANGE:
                     progress = NetworkSpeedInfo.progress;
                     mSpeedTestPercent.setText(progress + "%");
+                    if(progress == 100) {
+                        handler.sendEmptyMessage(SPEED_FINISH);
+                    }
                     break;
                 case SPEEDUPDATE:
                     mCurrenSpeed = NetworkSpeedInfo.Speed;
@@ -102,6 +105,16 @@ public class SpeedTestActivity extends BaseStatusBarActivity implements View.OnC
                     PROGRESSTHREADCANRUN = false;
                     THREADCANRUN = false;
                     NetworkSpeedInfo.FILECANREAD = false;
+
+                    NetworkSpeedInfo.progress = 0;
+                    NetworkSpeedInfo.FinishBytes = 0;
+
+                    mSpeedtestStartagainlayout.setVisibility(View.VISIBLE);
+                    mSpeedtestInstartlayout.setVisibility(View.GONE);
+
+                    mSpeedtestBtnStartagain.requestFocus();
+                    mSpeedtestBtnStartagain.requestFocusFromTouch();
+
                     break;
             }
         }

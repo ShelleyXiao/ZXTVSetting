@@ -20,7 +20,7 @@ import java.io.IOException;
  * FIXME
  */
 
-public class AboutActivity extends BaseActivity {
+public class AboutActivity extends BaseStatusBarActivity {
 
     TextView mDeviceName;
     TextView mDeviceAndroid;
@@ -51,7 +51,7 @@ public class AboutActivity extends BaseActivity {
         mDeviceName.setText(Build.MODEL);
         mDeviceVersion.setText(Build.DISPLAY);
         mDeviceMAC.setText(getWireMacAddr());
-        mDeviceip.setText(NetWorkUtil.getLocalIpAddress());
+        mDeviceip.setText(NetWorkUtil.getLocalNetState(this).ipAddress);
     }
 
     private String getWireMacAddr() {

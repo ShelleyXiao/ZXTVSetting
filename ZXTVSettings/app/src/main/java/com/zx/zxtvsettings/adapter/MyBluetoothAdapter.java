@@ -34,6 +34,11 @@ public class MyBluetoothAdapter extends BaseAdapter {
         this.list = list;
     }
 
+    public void clearDevice() {
+        list.clear();
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return list.size();

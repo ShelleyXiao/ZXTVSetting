@@ -8,13 +8,6 @@
     android:background="@drawable/bg"
     tools:context=".activity.MainActivity">
 
-    <include
-        android:id="@+id/statu"
-        layout="@layout/status_bar_layout"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/px130"
-        android:layout_marginTop="@dimen/px10"
-        />
 
     <HorizontalScrollView
         android:id="@+id/hscroll_view"
@@ -41,11 +34,11 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="@dimen/px100"
                 android:layout_marginTop="@dimen/px100"
-                android:src="@drawable/setting_net"
                 android:background="@drawable/sel_main_focus"
-                android:scaleType="fitXY"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/setting_net">
 
 
             </ImageButton>
@@ -59,11 +52,11 @@
                 android:layout_below="@+id/setting_net"
                 android:layout_marginLeft="@dimen/px100"
                 android:layout_marginTop="@dimen/px5"
-                android:src="@drawable/setting_display"
                 android:background="@drawable/sel_main_focus"
-                android:scaleType="fitXY"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/setting_display">
 
 
             </ImageButton>
@@ -75,11 +68,11 @@
                 android:layout_marginLeft="@dimen/px5"
                 android:layout_marginTop="@dimen/px100"
                 android:layout_toRightOf="@+id/setting_net"
-                android:src="@drawable/setting_bluethee"
                 android:background="@drawable/sel_main_focus"
-                android:scaleType="fitXY"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/setting_bluethee">
 
 
             </ImageButton>
@@ -92,11 +85,11 @@
                 android:layout_marginLeft="@dimen/px5"
                 android:layout_marginTop="@dimen/px5"
                 android:layout_toRightOf="@+id/setting_display"
-                android:src="@drawable/setting_uninstall"
                 android:background="@drawable/sel_main_focus"
-                android:scaleType="fitXY"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/setting_uninstall">
 
 
             </ImageButton>
@@ -108,11 +101,11 @@
                 android:layout_marginLeft="@dimen/px5"
                 android:layout_marginTop="@dimen/px100"
                 android:layout_toRightOf="@+id/setting_bluethee"
-                android:src="@drawable/setting_more"
                 android:background="@drawable/sel_main_focus"
-                android:scaleType="fitXY"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/setting_more">
 
             </ImageButton>
 
@@ -124,11 +117,11 @@
                 android:layout_marginLeft="@dimen/px5"
                 android:layout_marginTop="@dimen/px5"
                 android:layout_toRightOf="@+id/setting_uninstall"
-                android:src="@drawable/setting_about"
                 android:background="@drawable/sel_main_focus"
-                android:scaleType="fitXY"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/setting_about">
 
 
             </ImageButton>
@@ -140,11 +133,11 @@
                 android:layout_marginLeft="@dimen/px5"
                 android:layout_marginTop="@dimen/px100"
                 android:layout_toRightOf="@+id/setting_more"
-                android:src="@drawable/setting_clean"
                 android:background="@drawable/sel_main_focus"
-                android:scaleType="fitXY"
                 android:clickable="true"
                 android:focusable="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/setting_clean"
                 android:visibility="gone">
 
             </ImageButton>
@@ -153,6 +146,14 @@
         </RelativeLayout>
 
     </HorizontalScrollView>
+
+    <include
+        android:id="@+id/statu"
+        layout="@layout/status_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px130"
+        android:layout_marginTop="@dimen/px10"
+        />
 
     <ImageView
         android:id="@+id/mainUpView"

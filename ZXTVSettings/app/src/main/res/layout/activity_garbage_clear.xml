@@ -5,11 +5,19 @@
               android:background="@drawable/bg"
               android:orientation="vertical">
 
-    <com.zx.zxtvsettings.view.ViewStatusTitleView
-        android:id="@+id/status_bar"
+    <!--<com.zx.zxtvsettings.view.ViewStatusTitleView-->
+        <!--android:id="@+id/status_bar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/px60"-->
+        <!--android:layout_margin="@dimen/px20"-->
+        <!--/>-->
+
+    <include
+        android:id="@+id/statu"
+        layout="@layout/status_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/px60"
-        android:layout_margin="@dimen/px20"
+        android:layout_height="@dimen/px130"
+        android:layout_marginTop="@dimen/px10"
         />
 
 

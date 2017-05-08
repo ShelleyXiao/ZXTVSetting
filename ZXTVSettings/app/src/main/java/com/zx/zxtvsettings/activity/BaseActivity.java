@@ -11,7 +11,7 @@ import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -23,14 +23,11 @@ import android.widget.Toast;
 import com.zx.zxtvsettings.R;
 import com.zx.zxtvsettings.Utils.NetWorkUtil;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 
 /**
  * Created by WXT on 2016/7/8.
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends FragmentActivity {
 
     private static final int DEFAULT_TRAN_DUR_ANIM = 300;
 
@@ -38,7 +35,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private boolean isNetWork = true;
     public Context context;
 
-    protected Unbinder mUnbinder;
+//    protected Unbinder mUnbinder;
 
     protected String category , genre;
 
@@ -57,7 +54,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             // 删除窗口背景
             getWindow().setBackgroundDrawable(null);
 
-            mUnbinder = ButterKnife.bind(this);
+//            mUnbinder = ButterKnife.bind(this);
         }
 
         Bundle bundle = getIntent().getExtras();
@@ -82,7 +79,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mUnbinder.unbind();
+//        mUnbinder.unbind();
     }
 
     /**

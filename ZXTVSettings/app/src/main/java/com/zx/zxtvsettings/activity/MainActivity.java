@@ -1,13 +1,12 @@
 package com.zx.zxtvsettings.activity;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.ImageButton;
 
 import com.zx.zxtvsettings.R;
-import com.zx.zxtvsettings.Utils.Logger;
 
 
 public class MainActivity extends BaseStatusBarActivity implements View.OnClickListener {
@@ -21,7 +20,7 @@ public class MainActivity extends BaseStatusBarActivity implements View.OnClickL
     ImageButton mSettingAbout;
     ImageButton mSettingClear;
 
-    private boolean isFirstEnter = false;
+
 
     @Override
     protected int getLayoutId() {
@@ -66,21 +65,23 @@ public class MainActivity extends BaseStatusBarActivity implements View.OnClickL
         findViewById(R.id.setting_about).setOnClickListener(this);
         findViewById(R.id.setting_clear).setOnClickListener(this);
 
-        mSettingNet.getViewTreeObserver().addOnGlobalFocusChangeListener(new ViewTreeObserver.OnGlobalFocusChangeListener() {
-            @Override
-            public void onGlobalFocusChanged(View view, View view1) {
-//                Logger.getLogger().i(view.toString() + ", " + view1.toString());
-                Logger.getLogger().e("fffffffffffffff");
-                if(isFirstEnter && view != null) {
+//        mSettingNet.getViewTreeObserver().addOnWindowFocusChangeListener(new ViewTreeObserver.OnWindowFocusChangeListener() {
+//            @Override
+//            public void onWindowFocusChanged(boolean b) {
+//                if(b) {
+//                    mSettingNet.requestFocus();
+//                }
+//            }
+//        });
 
-                }
-            }
-
-        });
-
-        mSettingNet.requestFocus();
 
     }
+
+    @Override
+    protected View getFirstViewFocusRequest() {
+        return findViewById(R.id.setting_net);
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -93,13 +94,21 @@ public class MainActivity extends BaseStatusBarActivity implements View.OnClickL
                 startActivity(DisplayModeActivity.class);
                 break;
             case R.id.setting_bluethee:
-                startActivity(BluethoothActivity.class);
+//                BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+//                BluetoothManager mBluetoothManager = (BluetoothManager) this.getSystemService(Context.BLUETOOTH_SERVICE);
+//                BluetoothAdapter adapter = mBluetoothManager.getAdapter();
+                if (getPackageManager().hasSystemFeature(
+                        PackageManager.FEATURE_BLUETOOTH_LE))  {
+                    startActivity(BluethoothActivityNew.class);
+                } else {
+                    showToastLong(getString(R.string.not_support_bluethooth));
+                }
                 break;
             case R.id.setting_uninstall:
                 startActivity(AppUninstallActivity.class);
                 break;
             case R.id.setting_more:
-                Intent intent =  new Intent(Settings.ACTION_SETTINGS);
+                Intent intent = new Intent(Settings.ACTION_SETTINGS);
                 startActivity(intent);
                 break;
             case R.id.setting_about:

@@ -22,7 +22,6 @@
         android:layout_margin="@dimen/px10"
         android:layout_toRightOf="@id/item_app_uninstall_iv"
         android:gravity="center"
-        android:text="name"
         android:textColor="@color/white"
         android:textSize="30sp"/>
 

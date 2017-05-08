@@ -62,6 +62,8 @@ public class NetSetting extends BaseStatusBarActivity implements View.OnClickLis
         findViewById(R.id.setting_custom_ethernet).setOnClickListener(this);
         findViewById(R.id.setting_custom_net_detection).setOnClickListener(this);
         findViewById(R.id.setting_custom_net_soft_ap).setOnClickListener(this);
+
+        findViewById(R.id.setting_custom_wifi).requestFocus();
     }
 
     @Override

@@ -7,30 +7,55 @@ android {
 
     defaultConfig {
         applicationId "com.zx.zxtvsettings"
-        minSdkVersion 22
-        targetSdkVersion 24
+        minSdkVersion 21
+        targetSdkVersion 25
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
     }
+
+
+    sourceSets {
+        main {
+            aidl.srcDirs = ['src/main/java']
+        }
+    }
+
+
+    signingConfigs {
+        debug {
+            File strFile = new File("D:\\workspace\\keystroe\\key.jks")
+            storeFile file(strFile)
+            storePassword "123456"
+            keyAlias "key0"
+            keyPassword "123456"
+            //println strFile.absolutePath;
+        }
+        release {
+            File strFile = new File("D:\\workspace\\keystroe\\key.jks")
+            storeFile file('D:/workspace/keystroe/key.jks')
+            storePassword "123456"
+            keyPassword "123456"
+            keyAlias "key0"
+            // println strFile.absolutePath;
+        }
+    }
+
     buildTypes {
         debug {
+
+            signingConfig  signingConfigs.debug
             // 显示Log
             buildConfigField 'boolean', 'LOG_DEBUG', 'true'
 
         }
 
         release {
-
+            signingConfig  signingConfigs.release
             buildConfigField 'boolean', 'LOG_DEBUG', 'false'
 
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-
-    sourceSets {
-        main {
-            aidl.srcDirs = ['src/main/java']
         }
     }
 }
@@ -39,8 +64,11 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     provided files('libs/framework.jar')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.1.1'
-    compile project(':androidtvwidget')
-    compile 'com.jakewharton:butterknife:8.0.1'
-    apt 'com.jakewharton:butterknife-compiler:8.0.1'
+    //    compile 'com.android.support:appcompat-v7:24.1.1'
+    'com.android.support:appcompat-v7:22.2.1'
+    compile 'com.android.support:multidex:1.0.1'
+    //    compile project(':androidtvwidget')
+    //    compile 'com.jakewharton:butterknife:8.0.1'
+    //    apt 'com.jakewharton:butterknife-compiler:8.0.1'
+    compile 'com.android.support:support-v4:26.0.0-alpha1'
 }

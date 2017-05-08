@@ -34,7 +34,10 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:configChanges="keyboard|keyboardHidden|navigation"
+        android:name="android.support.multidex.MultiDexApplication"
+        >
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -43,11 +46,19 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.NetSetting"></activity>
+        <activity android:name=".activity.NetSetting"
+                  android:taskAffinity="com.zx.zxtvsettings"
+                  android:launchMode="singleInstance"
+                  android:excludeFromRecents="true"
+                  android:noHistory="true"
+                  android:exported="true">
+
+        </activity>
+
         <activity android:name=".activity.EthernetActvity"></activity>
         <activity android:name=".activity.WifiActivity"></activity>
         <activity android:name=".activity.WIfiApActivity"></activity>
-        <activity android:name=".activity.BluethoothActivity"></activity>
+        <activity android:name=".activity.BluethoothActivityNew"></activity>
         <activity android:name=".activity.SpeedTestActivity"></activity>
         <activity android:name=".activity.AppUninstallActivity"></activity>
         <activity android:name=".activity.AboutActivity"></activity>

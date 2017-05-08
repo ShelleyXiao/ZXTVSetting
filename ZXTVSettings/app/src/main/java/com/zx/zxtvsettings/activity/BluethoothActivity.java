@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.zx.zxtvsettings.R;
 import com.zx.zxtvsettings.Utils.Tools;
 import com.zx.zxtvsettings.adapter.MyBluetoothAdapter;
+import com.zx.zxtvsettings.bluetooth.BluetoothEnabler;
+import com.zx.zxtvsettings.bluetooth.SwitchBar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,6 +68,9 @@ public class BluethoothActivity extends BaseStatusBarActivity implements View.On
 
     private List<Map<String, Object>> list;
 
+    private BluetoothEnabler mBluetoothEnabler;
+    private SwitchBar mSwitchBar;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_setting_bluetooth;
@@ -76,6 +81,8 @@ public class BluethoothActivity extends BaseStatusBarActivity implements View.On
 
         initView();
 
+        setupView();
+
         mBluetoothLvSearchDevice.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -85,7 +92,15 @@ public class BluethoothActivity extends BaseStatusBarActivity implements View.On
         });
     }
 
+    @Override
+    protected View getFirstViewFocusRequest() {
+        return findViewById(R.id.bluetooth_rl_open);
+    }
+
     private void initView() {
+
+        mSwitchBar = (SwitchBar) findViewById(R.id.open_switchbar);
+
         mBluetoothIvOpen = (ImageView) findViewById(R.id.bluetooth_iv_open);
         mBluetoothRlOpen = (RelativeLayout) findViewById(R.id.bluetooth_rl_open);
 
@@ -109,6 +124,8 @@ public class BluethoothActivity extends BaseStatusBarActivity implements View.On
     @Override
     protected void initialized() {
         context = this;
+
+        mBluetoothEnabler = new BluetoothEnabler(this, mSwitchBar);
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         list = new ArrayList<Map<String, Object>>();

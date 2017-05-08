@@ -40,4 +40,6 @@
 
     <color name="time_statu">#ff03a9ff</color>
 
+    <color name="switch_accent_color">#ff7fcac3</color>
+
 </resources>

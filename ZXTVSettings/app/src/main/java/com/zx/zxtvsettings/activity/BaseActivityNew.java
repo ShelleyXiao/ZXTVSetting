@@ -13,9 +13,10 @@ import android.graphics.RectF;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
@@ -23,14 +24,15 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.Toast;
 
 import com.zx.zxtvsettings.R;
+import com.zx.zxtvsettings.Utils.Logger;
 import com.zx.zxtvsettings.Utils.NetWorkUtil;
 
 
-public abstract class BaseActivityNew extends AppCompatActivity {
+public abstract class BaseActivityNew extends FragmentActivity {
+
+    public static final String TAG = BaseActivityNew.class.getSimpleName();
 
     private static final int DEFAULT_TRAN_DUR_ANIM = 300;
-
-    public static final String TAG = BaseActivity.class.getSimpleName();
     private boolean isNetWork = true;
     public Context context;
 
@@ -40,6 +42,7 @@ public abstract class BaseActivityNew extends AppCompatActivity {
 
     protected View currentView;
 
+    protected boolean isFirstEnter = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public abstract class BaseActivityNew extends AppCompatActivity {
         if (layoutId != 0) {
             setContentView(layoutId);
             getWindow().setBackgroundDrawable(null);
+
 
         }
 
@@ -116,8 +120,25 @@ public abstract class BaseActivityNew extends AppCompatActivity {
      */
     protected abstract void initialized();
 
+    protected  View getFirstViewFocusRequest() {
+        return null;
+    }
+
     protected void setFocusMoveView(int id) {
         moveView = findViewById(id);
+
+        moveView.getViewTreeObserver().addOnWindowFocusChangeListener(new ViewTreeObserver.OnWindowFocusChangeListener() {
+            @Override
+            public void onWindowFocusChanged(boolean b) {
+//                if(b && !isFirstEnter) {
+//                    isFirstEnter = true;
+//                    View view = getFirstViewFocusRequest();
+//                    if(null != view) {
+//                        view.requestFocus();
+//                    }
+//                }
+            }
+        });
     }
 
     /**
@@ -318,7 +339,7 @@ public abstract class BaseActivityNew extends AppCompatActivity {
 
             if (hasFocus) {
                 currentView = v;
-
+                Logger.getLogger().e("FFFFFFFFFFFFFFFFFFF " + v.toString());
                 setFocusView(v);
                 moveView.setVisibility(View.VISIBLE);
                 flyWhiteBorder(v, moveView, 1.1f, 1.1f);
@@ -416,7 +437,11 @@ public abstract class BaseActivityNew extends AppCompatActivity {
 
             newWidth += ((int) Math.rint(mUpPaddingRect.right) + (int) Math.rint(mUpPaddingRect.left));
             newHeight += ((int) Math.rint(mUpPaddingRect.bottom) + (int) Math.rint(mUpPaddingRect.top));
+
+            Logger.getLogger().e("newX " + newX + " " + " newY = " + newY + "focusView.getMeasuredWidth()  " + focusView.getMeasuredWidth());
         }
+
+        Logger.getLogger().e("newX " + newX + " " + " newY = " + newY);
 
         ObjectAnimator transAnimatorX = ObjectAnimator.ofFloat(moveView, "translationX", newX);
         ObjectAnimator transAnimatorY = ObjectAnimator.ofFloat(moveView, "translationY", newY);
