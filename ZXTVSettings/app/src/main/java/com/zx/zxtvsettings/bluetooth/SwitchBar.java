@@ -87,6 +87,8 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         lp = (MarginLayoutParams) mSwitch.getLayoutParams();
 //        lp.setMarginEnd(switchBarMarginEnd);
 
+        mSwitch.setOnCheckedChangeListener(this);
+
         addOnSwitchChangeListener(new OnSwitchChangeListener() {
             @Override
             public void onSwitchChanged(Switch switchView, boolean isChecked) {

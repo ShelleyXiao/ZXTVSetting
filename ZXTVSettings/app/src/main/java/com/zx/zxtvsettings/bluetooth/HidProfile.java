@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * HidProfile handles Bluetooth HID profile.
  */
-final class HidProfile implements LocalBluetoothProfile {
+public final class HidProfile implements LocalBluetoothProfile {
     private static final String TAG = "HidProfile";
     private static boolean V = true;
 
@@ -80,7 +80,7 @@ final class HidProfile implements LocalBluetoothProfile {
         return mIsProfileReady;
     }
 
-    HidProfile(Context context, LocalBluetoothAdapter adapter,
+    public HidProfile(Context context, LocalBluetoothAdapter adapter,
         CachedBluetoothDeviceManager deviceManager,
         LocalBluetoothProfileManager profileManager) {
         mLocalAdapter = adapter;
@@ -174,7 +174,7 @@ final class HidProfile implements LocalBluetoothProfile {
         return getHidClassDrawable(btClass);
     }
 
-    static int getHidClassDrawable(BluetoothClass btClass) {
+    public static int getHidClassDrawable(BluetoothClass btClass) {
         switch (btClass.getDeviceClass()) {
             case BluetoothClass.Device.PERIPHERAL_KEYBOARD:
             case BluetoothClass.Device.PERIPHERAL_KEYBOARD_POINTING:

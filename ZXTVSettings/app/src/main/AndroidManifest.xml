@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
@@ -59,6 +60,25 @@
         <activity android:name=".activity.WifiActivity"></activity>
         <activity android:name=".activity.WIfiApActivity"></activity>
         <activity android:name=".activity.BluethoothActivityNew"></activity>
+
+        <activity android:name=".bluetooth.BluetoothPairingDialog"
+                  android:label="@string/bluetooth_pairing_request"
+                  android:excludeFromRecents="true"
+                  android:theme="@android:style/Theme.Material.Light.Dialog.Alert">
+            <intent-filter>
+                <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name=".bluetooth.BluetoothPairingRequest">
+            <intent-filter>
+                <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" />
+                <action android:name="android.bluetooth.device.action.PAIRING_CANCEL" />
+                <action android:name="android.bluetooth.device.action.BOND_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
         <activity android:name=".activity.SpeedTestActivity"></activity>
         <activity android:name=".activity.AppUninstallActivity"></activity>
         <activity android:name=".activity.AboutActivity"></activity>

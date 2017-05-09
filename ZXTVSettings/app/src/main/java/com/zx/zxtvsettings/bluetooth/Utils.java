@@ -17,6 +17,7 @@
 package com.zx.zxtvsettings.bluetooth;
 
 import android.app.AlertDialog;
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -30,9 +31,9 @@ import com.zx.zxtvsettings.R;
  * Android resource IDs, debug logging flags, and static methods
  * for creating dialogs.
  */
-final class Utils {
-    static final boolean V = false; // verbose logging
-    static final boolean D = true;  // regular logging
+public final class Utils {
+    public static final boolean V = false; // verbose logging
+    public static final boolean D = true;  // regular logging
 
     private Utils() {
     }
@@ -53,7 +54,7 @@ final class Utils {
     }
 
     // Create (or recycle existing) and show disconnect dialog.
-    static AlertDialog showDisconnectDialog(Context context,
+    public static AlertDialog showDisconnectDialog(Context context,
             AlertDialog dialog,
             DialogInterface.OnClickListener disconnectListener,
             CharSequence title, CharSequence message) {
@@ -78,7 +79,7 @@ final class Utils {
     }
 
     // TODO: wire this up to show connection errors...
-    static void showConnectingError(Context context, String name) {
+    public static void showConnectingError(Context context, String name) {
         // if (!mIsConnectingErrorPossible) {
         //     return;
         // }
@@ -87,7 +88,7 @@ final class Utils {
         showError(context, name, R.string.bluetooth_connecting_error_message);
     }
 
-    static void showError(Context context, String name, int messageResId) {
+    public static void showError(Context context, String name, int messageResId) {
         String message = context.getString(messageResId, name);
         LocalBluetoothManager manager = LocalBluetoothManager.getInstance(context);
         Context activity = manager.getForegroundActivity();
@@ -116,4 +117,57 @@ final class Utils {
 //
 //        Index.getInstance(context).updateFromSearchIndexableData(data);
 //    }
+
+    public static int getConnectionSummary(final CachedBluetoothDevice cachedDevice) {
+
+        boolean profileConnected = false;       // at least one profile is connected
+        boolean a2dpNotConnected = false;       // A2DP is preferred but not connected
+        boolean headsetNotConnected = false;    // Headset is preferred but not connected
+
+        for (LocalBluetoothProfile profile : cachedDevice.getProfiles()) {
+            int connectionStatus = cachedDevice.getProfileConnectionState(profile);
+
+            switch (connectionStatus) {
+                case BluetoothProfile.STATE_CONNECTING:
+                case BluetoothProfile.STATE_DISCONNECTING:
+                    return Utils.getConnectionStateSummary(connectionStatus);
+
+                case BluetoothProfile.STATE_CONNECTED:
+                    profileConnected = true;
+                    break;
+
+                case BluetoothProfile.STATE_DISCONNECTED:
+                    if (profile.isProfileReady()) {
+                        if (profile instanceof A2dpProfile) {
+                            a2dpNotConnected = true;
+                        } else if (profile instanceof HeadsetProfile) {
+                            headsetNotConnected = true;
+                        }
+                    }
+                    break;
+            }
+        }
+
+        if (profileConnected) {
+            if (a2dpNotConnected && headsetNotConnected) {
+                return R.string.bluetooth_connected_no_headset_no_a2dp;
+            } else if (a2dpNotConnected) {
+                return R.string.bluetooth_connected_no_a2dp;
+            } else if (headsetNotConnected) {
+                return R.string.bluetooth_connected_no_headset;
+            } else {
+                return R.string.bluetooth_connected;
+            }
+        }
+
+        switch (cachedDevice.getBondState()) {
+            case BluetoothDevice.BOND_BONDING:
+                return R.string.bluetooth_pairing;
+
+            case BluetoothDevice.BOND_BONDED:
+            case BluetoothDevice.BOND_NONE:
+            default:
+                return 0;
+        }
+    }
 }

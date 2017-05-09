@@ -27,6 +27,7 @@ import android.content.IntentFilter;
 import android.util.Log;
 
 import com.zx.zxtvsettings.R;
+import com.zx.zxtvsettings.Utils.Logger;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -184,7 +185,7 @@ public final class BluetoothEventManager {
                 }
             }
             mDeviceManager.onScanningStateChanged(mStarted);
-//            LocalBluetoothPreferences.persistDiscoveringTimestamp(context);
+            LocalBluetoothPreferences.persistDiscoveringTimestamp(context);
         }
     }
 
@@ -208,6 +209,7 @@ public final class BluetoothEventManager {
             cachedDevice.setBtClass(btClass);
             cachedDevice.setNewName(name);
             cachedDevice.setVisible(true);
+            Logger.getLogger().i("DeviceFoundHandler " + name);
         }
     }
 
@@ -224,7 +226,7 @@ public final class BluetoothEventManager {
                 BluetoothDevice device) {
             CachedBluetoothDevice cachedDevice = mDeviceManager.findDevice(device);
             if (cachedDevice == null) {
-                Log.w(TAG, "received ACTION_DISAPPEARED for an unknown device: " + device);
+                Logger.getLogger().w( "received ACTION_DISAPPEARED for an unknown device: " + device);
                 return;
             }
             if (CachedBluetoothDeviceManager.onDeviceDisappeared(cachedDevice)) {
@@ -248,23 +250,23 @@ public final class BluetoothEventManager {
         public void onReceive(Context context, Intent intent,
                 BluetoothDevice device) {
             if (device == null) {
-                Log.e(TAG, "ACTION_BOND_STATE_CHANGED with no EXTRA_DEVICE");
+                Logger.getLogger().e(TAG, "ACTION_BOND_STATE_CHANGED with no EXTRA_DEVICE");
                 return;
             }
             int bondState = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE,
                                                BluetoothDevice.ERROR);
             CachedBluetoothDevice cachedDevice = mDeviceManager.findDevice(device);
             if (cachedDevice == null) {
-                Log.w(TAG, "CachedBluetoothDevice for device " + device +
+                Logger.getLogger().w( "CachedBluetoothDevice for device " + device +
                         " not found, calling readPairedDevices().");
                 if (!readPairedDevices()) {
-                    Log.e(TAG, "Got bonding state changed for " + device +
+                    Logger.getLogger().e(TAG, "Got bonding state changed for " + device +
                             ", but we have no record of that device.");
                     return;
                 }
                 cachedDevice = mDeviceManager.findDevice(device);
                 if (cachedDevice == null) {
-                    Log.e(TAG, "Got bonding state changed for " + device +
+                    Logger.getLogger().e(TAG, "Got bonding state changed for " + device +
                             ", but device not added in cache.");
                     return;
                 }
@@ -321,7 +323,7 @@ public final class BluetoothEventManager {
                 errorMsg = R.string.bluetooth_pairing_error_message;
                 break;
             default:
-                Log.w(TAG, "showUnbondMessage: Not displaying any message for reason: " + reason);
+                Logger.getLogger().w( "showUnbondMessage: Not displaying any message for reason: " + reason);
                 return;
             }
             Utils.showError(context, name, errorMsg);
@@ -345,7 +347,7 @@ public final class BluetoothEventManager {
     private class PairingCancelHandler implements Handler {
         public void onReceive(Context context, Intent intent, BluetoothDevice device) {
             if (device == null) {
-                Log.e(TAG, "ACTION_PAIRING_CANCEL with no EXTRA_DEVICE");
+                Logger.getLogger().e(TAG, "ACTION_PAIRING_CANCEL with no EXTRA_DEVICE");
                 return;
             }
             int errorMsg = R.string.bluetooth_pairing_error_message;
@@ -369,7 +371,7 @@ public final class BluetoothEventManager {
             }
         }
     }
-    boolean readPairedDevices() {
+    public boolean readPairedDevices() {
         Set<BluetoothDevice> bondedDevices = mLocalAdapter.getBondedDevices();
         if (bondedDevices == null) {
             return false;

@@ -21,6 +21,8 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.util.Log;
 
+import com.zx.zxtvsettings.Utils.Logger;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -64,9 +66,9 @@ public final class CachedBluetoothDeviceManager {
      *
      * @param device the address of the Bluetooth device
      * @return the cached device object for this device, or null if it has
-     *   not been previously seen
+     * not been previously seen
      */
-    CachedBluetoothDevice findDevice(BluetoothDevice device) {
+    public CachedBluetoothDevice findDevice(BluetoothDevice device) {
         for (CachedBluetoothDevice cachedDevice : mCachedDevices) {
             if (cachedDevice.getDevice().equals(device)) {
                 return cachedDevice;
@@ -78,14 +80,15 @@ public final class CachedBluetoothDeviceManager {
     /**
      * Create and return a new {@link CachedBluetoothDevice}. This assumes
      * that {@link #findDevice} has already been called and returned null.
+     *
      * @param device the address of the new Bluetooth device
      * @return the newly created CachedBluetoothDevice object
      */
-    CachedBluetoothDevice addDevice(LocalBluetoothAdapter adapter,
-            LocalBluetoothProfileManager profileManager,
-            BluetoothDevice device) {
+    public CachedBluetoothDevice addDevice(LocalBluetoothAdapter adapter,
+                                           LocalBluetoothProfileManager profileManager,
+                                           BluetoothDevice device) {
         CachedBluetoothDevice newDevice = new CachedBluetoothDevice(mContext, adapter,
-            profileManager, device);
+                profileManager, device);
         synchronized (mCachedDevices) {
             mCachedDevices.add(newDevice);
         }
@@ -116,8 +119,16 @@ public final class CachedBluetoothDeviceManager {
         for (int i = mCachedDevices.size() - 1; i >= 0; i--) {
             CachedBluetoothDevice cachedDevice = mCachedDevices.get(i);
             if (cachedDevice.getBondState() != BluetoothDevice.BOND_BONDED) {
+                Logger.getLogger().i("clear " + cachedDevice.getName());
                 mCachedDevices.remove(i);
             }
+        }
+    }
+
+    public synchronized void clearDevices() {
+        for (int i = mCachedDevices.size() - 1; i >= 0; i--) {
+            CachedBluetoothDevice cachedDevice = mCachedDevices.get(i);
+            mCachedDevices.remove(i);
         }
     }
 
@@ -164,6 +175,7 @@ public final class CachedBluetoothDeviceManager {
             }
         }
     }
+
     private void log(String msg) {
         if (DEBUG) {
             Log.d(TAG, msg);

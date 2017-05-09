@@ -19,31 +19,26 @@ package com.zx.zxtvsettings.bluetooth;
 import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHeadset;
-import android.bluetooth.BluetoothMap;
 import android.bluetooth.BluetoothInputDevice;
+import android.bluetooth.BluetoothMap;
 import android.bluetooth.BluetoothPan;
-import android.bluetooth.BluetoothPbap;
 import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothUuid;
 import android.content.Context;
 import android.content.Intent;
 import android.os.ParcelUuid;
 import android.util.Log;
-import android.os.Handler;
-import android.os.Message;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-import java.util.List;
 
 /**
  * LocalBluetoothProfileManager provides access to the LocalBluetoothProfile
  * objects for the available Bluetooth profiles.
  */
-final class LocalBluetoothProfileManager {
+public final class LocalBluetoothProfileManager {
     private boolean DEBUG = true;
     private static final String TAG = "LocalBluetoothProfileManager";
     /**
@@ -89,10 +84,10 @@ final class LocalBluetoothProfileManager {
     private final Map<String, LocalBluetoothProfile>
             mProfileNameMap = new HashMap<String, LocalBluetoothProfile>();
 
-    LocalBluetoothProfileManager(Context context,
-                                 LocalBluetoothAdapter adapter,
-                                 CachedBluetoothDeviceManager deviceManager,
-                                 BluetoothEventManager eventManager) {
+    public LocalBluetoothProfileManager(Context context,
+                                        LocalBluetoothAdapter adapter,
+                                        CachedBluetoothDeviceManager deviceManager,
+                                        BluetoothEventManager eventManager) {
         mContext = context;
 
         mLocalAdapter = adapter;
@@ -198,7 +193,7 @@ final class LocalBluetoothProfileManager {
         mProfileNameMap.put(profileName, profile);
     }
 
-    LocalBluetoothProfile getProfileByName(String name) {
+    public LocalBluetoothProfile getProfileByName(String name) {
         return mProfileNameMap.get(name);
     }
 
@@ -259,24 +254,24 @@ final class LocalBluetoothProfileManager {
     }
 
     // called from DockService
-    void addServiceListener(ServiceListener l) {
+    public void addServiceListener(ServiceListener l) {
         mServiceListeners.add(l);
     }
 
     // called from DockService
-    void removeServiceListener(ServiceListener l) {
+    public void removeServiceListener(ServiceListener l) {
         mServiceListeners.remove(l);
     }
 
     // not synchronized: use only from UI thread! (TODO: verify)
-    void callServiceConnectedListeners() {
+    public void callServiceConnectedListeners() {
         for (ServiceListener l : mServiceListeners) {
             l.onServiceConnected();
         }
     }
 
     // not synchronized: use only from UI thread! (TODO: verify)
-    void callServiceDisconnectedListeners() {
+    public void callServiceDisconnectedListeners() {
         for (ServiceListener listener : mServiceListeners) {
             listener.onServiceDisconnected();
         }
@@ -297,19 +292,19 @@ final class LocalBluetoothProfileManager {
         return false;
     }
 
-    A2dpProfile getA2dpProfile() {
+    public A2dpProfile getA2dpProfile() {
         return mA2dpProfile;
     }
 
-    HeadsetProfile getHeadsetProfile() {
+    public HeadsetProfile getHeadsetProfile() {
         return mHeadsetProfile;
     }
 
-    PbapServerProfile getPbapProfile() {
+    public PbapServerProfile getPbapProfile() {
         return mPbapProfile;
     }
 
-    MapProfile getMapProfile() {
+    public MapProfile getMapProfile() {
         return mMapProfile;
     }
 
@@ -322,10 +317,10 @@ final class LocalBluetoothProfileManager {
      * @param profiles        The list of profiles to fill
      * @param removedProfiles list of profiles that were removed
      */
-    synchronized void updateProfiles(ParcelUuid[] uuids, ParcelUuid[] localUuids,
-                                     Collection<LocalBluetoothProfile> profiles,
-                                     Collection<LocalBluetoothProfile> removedProfiles,
-                                     boolean isPanNapConnected, BluetoothDevice device) {
+    public synchronized void updateProfiles(ParcelUuid[] uuids, ParcelUuid[] localUuids,
+                                            Collection<LocalBluetoothProfile> profiles,
+                                            Collection<LocalBluetoothProfile> removedProfiles,
+                                            boolean isPanNapConnected, BluetoothDevice device) {
         // Copy previous profile list into removedProfiles
         removedProfiles.clear();
         removedProfiles.addAll(profiles);

@@ -20,7 +20,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import com.zx.zxtvsettings.Utils.Logger;
 
@@ -43,7 +42,7 @@ public final class BluetoothDiscoveryReceiver extends BroadcastReceiver {
 
         if (action.equals(BluetoothAdapter.ACTION_DISCOVERY_STARTED) ||
                 action.equals(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)) {
-//            LocalBluetoothPreferences.persistDiscoveringTimestamp(context);
+            LocalBluetoothPreferences.persistDiscoveringTimestamp(context);
         }
     }
 }

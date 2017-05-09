@@ -6,20 +6,18 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.preference.PreferenceGroup;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zx.zxtvsettings.R;
 import com.zx.zxtvsettings.Utils.Logger;
-import com.zx.zxtvsettings.Utils.Tools;
-import com.zx.zxtvsettings.adapter.MyBluetoothAdapter;
+import com.zx.zxtvsettings.adapter.MyBluetoothAdapterNew;
 import com.zx.zxtvsettings.bluetooth.BluetoothCallback;
 import com.zx.zxtvsettings.bluetooth.BluetoothDeviceFilter;
 import com.zx.zxtvsettings.bluetooth.BluetoothEnabler;
@@ -27,14 +25,14 @@ import com.zx.zxtvsettings.bluetooth.CachedBluetoothDevice;
 import com.zx.zxtvsettings.bluetooth.LocalBluetoothAdapter;
 import com.zx.zxtvsettings.bluetooth.LocalBluetoothManager;
 import com.zx.zxtvsettings.bluetooth.SwitchBar;
+import com.zx.zxtvsettings.bluetooth.Utils;
+import com.zx.zxtvsettings.bluetooth.view.BluetoothDeviceView;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.WeakHashMap;
 
 /**
  * User: ShaudXiao
@@ -45,8 +43,8 @@ import java.util.Set;
  * FIXME
  */
 
-public class BluethoothActivityNew extends BaseStatusBarActivity implements View.OnClickListener
-        , BluetoothCallback {
+public class BluethoothActivityNew extends BaseStatusBarActivity implements View.OnClickListener,
+         BluetoothCallback, BluetoothDeviceView.IDeviceStateChangeListener {
 
     ImageView mBluetoothIvOpen;
     RelativeLayout mBluetoothRlOpen;
@@ -57,25 +55,26 @@ public class BluethoothActivityNew extends BaseStatusBarActivity implements View
     RelativeLayout mBluetoothRlSetting;
     TextView mBluetoothTvPair;
     TextView mBluetoothTvPairName;
+    TextView mBluetoothTvPairState;
     RelativeLayout mBluetoothRlPair1;
     RelativeLayout mBluetoothRlPair;
     TextView mBluetoothTvSearchDevice;
     ListView mBluetoothLvSearchDevice;
     RelativeLayout mBluetoothRlSearchDevice;
 
+    LinearLayout mBluetoothLlSearchDevice;
+    LinearLayout mBluetoothLlSearchDevicePired;
+
+    LinearLayout mDeviceListGroup;
+
     TextView mEmptyView;
 
-    private Set<BluetoothDevice> bondedDevices;
-    private BluetoothDevice pairDevice;
-
-    private boolean openFlag;
-    private boolean detectionFlag;
     private int pairPosition = -1;
 
     private Context context;
 
     private BluetoothAdapter bluetoothAdapter;
-    private MyBluetoothAdapter itemAdapter;
+    private MyBluetoothAdapterNew mDeviceListAdapter;
 
     private List<Map<String, Object>> list;
 
@@ -96,6 +95,13 @@ public class BluethoothActivityNew extends BaseStatusBarActivity implements View
     private boolean mInitialScanStarted;
     private boolean mAvailableDevicesCategoryIsPresent;
 
+    private final WeakHashMap<CachedBluetoothDevice, BluetoothDeviceView> mDeviceViewMap =
+            new WeakHashMap<CachedBluetoothDevice, BluetoothDeviceView>();
+
+
+    private CachedBluetoothDevice mPiredDevice;
+
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_setting_bluetooth;
@@ -108,13 +114,6 @@ public class BluethoothActivityNew extends BaseStatusBarActivity implements View
 
         setupView();
 
-        mBluetoothLvSearchDevice.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                BluetoothDevice device = (BluetoothDevice) list.get(i).get("device");
-                device.createBond();
-            }
-        });
     }
 
     @Override
@@ -136,14 +135,22 @@ public class BluethoothActivityNew extends BaseStatusBarActivity implements View
         mBluetoothIvSearch = (ImageView) findViewById(R.id.bluetooth_iv_search);
         mBluetoothRlSearch = (RelativeLayout) findViewById(R.id.bluetooth_rl_search);
         mBluetoothRlSetting = (RelativeLayout) findViewById(R.id.bluetooth_rl_setting);
+
         mBluetoothTvPair = (TextView) findViewById(R.id.bluetooth_tv_pair);
         mBluetoothTvPairName = (TextView) findViewById(R.id.bluetooth_tv_pair_name);
+        mBluetoothTvPairState = (TextView) findViewById(R.id.bluetooth_tv_pair_state);
         mBluetoothRlPair1 = (RelativeLayout) findViewById(R.id.bluetooth_rl_pair1);
         mBluetoothRlPair = (RelativeLayout) findViewById(R.id.bluetooth_rl_pair);
+
         mBluetoothTvSearchDevice = (TextView) findViewById(R.id.bluetooth_tv_search_device);
         mBluetoothLvSearchDevice = (ListView) findViewById(R.id.bluetooth_lv_search_device);
 
         mBluetoothRlSearchDevice = (RelativeLayout) findViewById(R.id.bluetooth_rl_search_device);
+
+        mBluetoothLlSearchDevice = (LinearLayout) findViewById(R.id.bluetooth_ll_search_device);
+        mBluetoothLlSearchDevicePired = (LinearLayout) findViewById(R.id.bluetooth_ll_search_device_pired);
+
+        mDeviceListGroup = mBluetoothLlSearchDevicePired;
     }
 
     @Override
@@ -153,37 +160,20 @@ public class BluethoothActivityNew extends BaseStatusBarActivity implements View
 
         initBlutooth();
 
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        list = new ArrayList<Map<String, Object>>();
-        if (bluetoothAdapter.isEnabled()) {
-            mBluetoothIvOpen.setBackgroundResource(R.drawable.switch_on);
-            mBluetoothIvDetection.setBackgroundResource(R.drawable.switch_off);
-            mBluetoothIvSearch.setVisibility(View.VISIBLE);
-            mBluetoothTvPair.setVisibility(View.VISIBLE);
-            mBluetoothRlPair.setVisibility(View.VISIBLE);
-            mBluetoothLvSearchDevice.setVisibility(View.VISIBLE);
-            mBluetoothRlSearchDevice.setVisibility(View.VISIBLE);
-
-            bondedDevices = bluetoothAdapter.getBondedDevices();
-            Iterator iterator = bondedDevices.iterator();
-            if (iterator.hasNext()) {
-                BluetoothDevice bond = (BluetoothDevice) iterator.next();
-                pairDevice = bond;
-                mBluetoothTvPairName.setText(bond.getName());
-                pairPosition = -2;
-            }
-            openFlag = true;
-        } else {
-            mBluetoothIvOpen.setBackgroundResource(R.drawable.switch_off);
-            mBluetoothIvDetection.setBackgroundResource(R.drawable.switch_off);
-            mBluetoothIvSearch.setVisibility(View.GONE);
-            mBluetoothTvPair.setVisibility(View.GONE);
-            mBluetoothRlPair.setVisibility(View.GONE);
-            mBluetoothTvSearchDevice.setVisibility(View.GONE);
-            mBluetoothRlSearchDevice.setVisibility(View.GONE);
-        }
-
-
+        Logger.getLogger().e("mLocalAdapter.enable() " + mLocalAdapter.enable());
+//        if(mLocalAdapter.enable()) {
+//            mBluetoothIvSearch.setVisibility(View.VISIBLE);
+//            mBluetoothTvPair.setVisibility(View.VISIBLE);
+//            mBluetoothRlPair.setVisibility(View.VISIBLE);
+//            mBluetoothLvSearchDevice.setVisibility(View.VISIBLE);
+//            mBluetoothRlSearchDevice.setVisibility(View.VISIBLE);
+//        } else {
+//            mBluetoothIvSearch.setVisibility(View.GONE);
+//            mBluetoothTvPair.setVisibility(View.GONE);
+//            mBluetoothRlPair.setVisibility(View.GONE);
+//            mBluetoothTvSearchDevice.setVisibility(View.GONE);
+//            mBluetoothRlSearchDevice.setVisibility(View.GONE);
+//        }
     }
 
     private void initBlutooth() {
@@ -204,13 +194,13 @@ public class BluethoothActivityNew extends BaseStatusBarActivity implements View
     public void onResume() {
         super.onResume();
 
-        resisgerReciver();
-
         if (mBluetoothEnabler != null) {
             mBluetoothEnabler.resume(this);
         }
 
         if (mLocalManager == null) return;
+
+        mInitiateDiscoverable = true;
 
         mLocalManager.setForegroundActivity(this);
         mLocalManager.getEventManager().registerCallback(this);
@@ -232,12 +222,14 @@ public class BluethoothActivityNew extends BaseStatusBarActivity implements View
         removeAllDevices();
         mLocalManager.setForegroundActivity(null);
         mLocalManager.getEventManager().unregisterCallback(this);
+
+        mBluetoothEnabler.pause();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(searchReceiver);
+//        unregisterReceiver(searchReceiver);
     }
 
     private void resisgerReciver() {
@@ -254,100 +246,35 @@ public class BluethoothActivityNew extends BaseStatusBarActivity implements View
     }
 
     private void setupView() {
-//        findViewById(R.id.bluetooth_rl_open).setOnClickListener(this);
-        findViewById(R.id.bluetooth_rl_detection).setOnClickListener(this);
+        findViewById(R.id.bluetooth_rl_open).setOnClickListener(this);
         findViewById(R.id.bluetooth_rl_pair1).setOnClickListener(this);
-//        findViewById(R.id.bluetooth_rl_search).setOnClickListener(this);
+        findViewById(R.id.bluetooth_rl_search).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bluetooth_rl_open:
-                if (!openFlag) {
-                    bluetoothAdapter.disable();
-                    mBluetoothIvOpen.setBackgroundResource(R.drawable.switch_off);
-                    mBluetoothIvDetection.setBackgroundResource(R.drawable.switch_off);
-                    mBluetoothIvSearch.setVisibility(View.GONE);
-                    mBluetoothTvPair.setVisibility(View.GONE);
-                    mBluetoothRlPair.setVisibility(View.GONE);
-                    mBluetoothTvSearchDevice.setVisibility(View.GONE);
-                    mBluetoothRlSearchDevice.setVisibility(View.GONE);
-
-                    openFlag = !openFlag;
+                if(mBluetoothEnabler.isChecked()) {
+                    mBluetoothEnabler.setChecked(false);
                 } else {
-                    if (bluetoothAdapter != null) {
-                        if (!bluetoothAdapter.isEnabled()) {
-                            Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                            startActivity(intent);
-                        }
-                    } else {
-                        showToastShort(getString(R.string.bluetooth_disabled));
-                    }
-
-                    mBluetoothIvOpen.setBackgroundResource(R.drawable.switch_on);
-                    mBluetoothIvSearch.setVisibility(View.VISIBLE);
-                    mBluetoothTvPair.setVisibility(View.VISIBLE);
-                    mBluetoothRlPair.setVisibility(View.VISIBLE);
-                    mBluetoothLvSearchDevice.setVisibility(View.VISIBLE);
-                    mBluetoothRlSearchDevice.setVisibility(View.VISIBLE);
-
-                    openFlag = !openFlag;
-                }
-                break;
-            case R.id.bluetooth_rl_detection:
-                if (detectionFlag) {
-                    mBluetoothIvDetection.setBackgroundResource(R.drawable.switch_off);
-                    detectionFlag = !detectionFlag;
-                } else {
-                    Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-                    startActivity(discoverableIntent);
-                    mBluetoothIvDetection.setBackgroundResource(R.drawable.switch_on);
-                    detectionFlag = !detectionFlag;
+                    mBluetoothEnabler.setChecked(true);
                 }
                 break;
             case R.id.bluetooth_rl_pair1:
-                if (pairPosition > -1) {
-                    BluetoothDevice device = (BluetoothDevice) list.get(pairPosition).get("device");
-                    try {
-                        boolean b = Tools.removeBond(device.getClass(), device);
-                        if (b) {
-                            Map<String, Object> map = new HashMap<String, Object>();
-                            map.put("name", device.getName());
-                            map.put("type", device.getBluetoothClass().getDeviceClass());
-                            map.put("device", device);
-                            list.add(map);
-                            itemAdapter.notifyDataSetChanged();
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        ;
-                    }
-                } else if (pairPosition == -2) {
-                    try {
-                        showToastShort(getString(R.string.bluetooth_connect_canceling));
-                        boolean b = Tools.removeBond(pairDevice.getClass(), pairDevice);
-                        if (b) {
-                            Map<String, Object> map = new HashMap<String, Object>();
-                            map.put("name", pairDevice.getName());
-                            map.put("type", pairDevice.getBluetoothClass().getDeviceClass());
-                            map.put("device", pairDevice);
-                            mBluetoothTvPairName.setText(R.string.bluetooth_not_conected);
-                            list.add(map);
-                            itemAdapter.notifyDataSetChanged();
-                        } else {
-                            showToastShort(getString(R.string.bluetooth_connect_cancel_failed));
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
+
                 break;
             case R.id.bluetooth_rl_search:
-                Animation rotateAnimation = AnimationUtils.loadAnimation(context, R.anim.rotate);
-                mBluetoothIvSearch.startAnimation(rotateAnimation);
-                bluetoothAdapter.startDiscovery();
+                if (mLocalAdapter.getBluetoothState() == BluetoothAdapter.STATE_ON) {
+                    startScanning();
+                }
+
                 break;
+        }
+
+        if (view instanceof BluetoothDeviceView) {
+            BluetoothDeviceView deviceView = (BluetoothDeviceView) view;
+            deviceView.onClicked();
         }
     }
 
@@ -368,8 +295,8 @@ public class BluethoothActivityNew extends BaseStatusBarActivity implements View
                     map.put("device", device);
                     if (list.indexOf(map) == -1) {// 防止重复添加
                         list.add(map);
-                        itemAdapter = new MyBluetoothAdapter(context, list);
-                        mBluetoothLvSearchDevice.setAdapter(itemAdapter);
+//                        mDeviceListAdapter = new MyBluetoothAdapter(context, list);
+//                        mBluetoothLvSearchDevice.setAdapter(mDeviceListAdapter);
                     }
                 }
             } else if (device != null && device.getBondState() == BluetoothDevice.BOND_BONDING) {
@@ -380,7 +307,7 @@ public class BluethoothActivityNew extends BaseStatusBarActivity implements View
                     if (list.get(i).get("device").equals(device)) {
                         pairPosition = i;
                         list.remove(i);
-                        itemAdapter.notifyDataSetChanged();
+                        mDeviceListAdapter.notifyDataSetChanged();
                     }
                 }
                 showToastShort(getString(R.string.bluetooth_connected));
@@ -392,13 +319,11 @@ public class BluethoothActivityNew extends BaseStatusBarActivity implements View
         mFilter = filter;
     }
 
-    private void setFilter(int filterType) {
-        mFilter = BluetoothDeviceFilter.getFilter(filterType);
-    }
 
     private void removeAllDevices() {
         mLocalAdapter.stopScanning();
-
+        mDeviceViewMap.clear();
+        mDeviceListGroup.removeAllViews();
     }
 
     private void addCachedDevices() {
@@ -427,11 +352,15 @@ public class BluethoothActivityNew extends BaseStatusBarActivity implements View
     @Override
     public void onDeviceAdded(CachedBluetoothDevice cachedDevice) {
         // Prevent updates while the list shows one of the state messages
-        Logger.getLogger().i("********onDeviceAdded*******");
+        if (mDeviceViewMap.get(cachedDevice) != null) {
+            return;
+        }
+
         if (mLocalAdapter.getBluetoothState() != BluetoothAdapter.STATE_ON) return;
 
+        Logger.getLogger().i(mFilter.matches(cachedDevice.getDevice()) + " " + cachedDevice.getName());
         if (mFilter.matches(cachedDevice.getDevice())) {
-
+            createDeviceView(cachedDevice);
         }
     }
 
@@ -449,18 +378,15 @@ public class BluethoothActivityNew extends BaseStatusBarActivity implements View
 
     private void startScanning() {
         if (!mAvailableDevicesCategoryIsPresent) {
-//            getPreferenceScreen().addPreference(mAvailableDevicesCategory);
             mBluetoothRlSearchDevice.setVisibility(View.VISIBLE);
             mAvailableDevicesCategoryIsPresent = true;
         }
 
-        removeAllDevices();
-
-        mLocalManager.getCachedDeviceManager().clearNonBondedDevices();
-//        mAvailableDevicesCategory.removeAll();
-        if (null != itemAdapter) {
-            itemAdapter.clearDevice();
+        if (mBluetoothLlSearchDevice != null) {
+            setDeviceListGroup(mBluetoothLlSearchDevice);
+            removeAllDevices();
         }
+        mLocalManager.getCachedDeviceManager().clearNonBondedDevices();
 
         mInitialScanStarted = true;
         mLocalAdapter.startScanning(true);
@@ -469,64 +395,40 @@ public class BluethoothActivityNew extends BaseStatusBarActivity implements View
 
     private void updateContent(int bluetoothState) {
         int messageId = 0;
-        Logger.getLogger().i("**** updateContent **** bluetoothState = " + bluetoothState);
+        Logger.getLogger().e("**** updateContent **** bluetoothState = " + bluetoothState);
         switch (bluetoothState) {
             case BluetoothAdapter.STATE_ON:
-
+                removeAllDevices();
+                mDeviceViewMap.clear();
                 //已配对过的
                 // Paired devices category
-//                if (mPairedDevicesCategory == null) {
-//                    mPairedDevicesCategory = new PreferenceCategory(getActivity());
-//                } else {
-//                    mPairedDevicesCategory.removeAll();
-//                }
-//                addDeviceCategory(mPairedDevicesCategory,
-//                        R.string.bluetooth_preference_paired_devices,
-//                        BluetoothDeviceFilter.BONDED_DEVICE_FILTER, true);
-//                int numberOfPairedDevices = mPairedDevicesCategory.getPreferenceCount();
+//                mBluetoothTvPair.setVisibility(View.VISIBLE);
+//                mBluetoothRlPair.setVisibility(View.VISIBLE);
+                Logger.getLogger().e("********** BluetoothDeviceFilter.BONDED_DEVICE_FILTER ");
 
-                mBluetoothTvPair.setVisibility(View.VISIBLE);
-                mBluetoothRlPair.setVisibility(View.VISIBLE);
-                addDeviceCategory(BluetoothDeviceFilter.BONDED_DEVICE_FILTER, true);
+                mBluetoothLlSearchDevicePired.removeAllViews();
+                addDeviceCategory(mBluetoothLlSearchDevicePired,
+                        BluetoothDeviceFilter.BONDED_DEVICE_FILTER, true);
 
-                //发现的可配对设备
-                // Available devices category
-//                if (mAvailableDevicesCategory == null) {
-//                    mAvailableDevicesCategory = new BluetoothProgressCategory(getActivity());
-//                    mAvailableDevicesCategory.setSelectable(false);
-//                } else {
-//                    mAvailableDevicesCategory.removeAll();
-//                }
-//                addDeviceCategory(mAvailableDevicesCategory,
-//                        R.string.bluetooth_preference_found_devices,
-//                        BluetoothDeviceFilter.UNBONDED_DEVICE_FILTER, mInitialScanStarted);
-//                int numberOfAvailableDevices = mAvailableDevicesCategory.getPreferenceCount();
-
-                addDeviceCategory(BluetoothDeviceFilter.UNBONDED_DEVICE_FILTER, mInitialScanStarted);
-
+                mBluetoothLlSearchDevice.removeAllViews();
+                addDeviceCategory(mBluetoothLlSearchDevice,
+                        BluetoothDeviceFilter.UNBONDED_DEVICE_FILTER, mInitialScanStarted);
+                Logger.getLogger().i("size + " + mBluetoothLlSearchDevicePired.getChildCount());
                 mBluetoothIvOpen.setBackgroundResource(R.drawable.switch_on);
-                mBluetoothIvSearch.setVisibility(View.VISIBLE);
 
                 mBluetoothLvSearchDevice.setVisibility(View.VISIBLE);
                 mBluetoothRlSearchDevice.setVisibility(View.VISIBLE);
+                mBluetoothTvSearchDevice.setVisibility(View.VISIBLE);
+
+                mBluetoothRlSearch.setVisibility(View.VISIBLE);
+                mBluetoothIvSearch.setVisibility(View.VISIBLE);
 
                 if (!mInitialScanStarted) {
+                    Logger.getLogger().e("start scan");
                     startScanning();
                 }
 
                 //未打开蓝牙的提示
-//                if (mMyDevicePreference == null) {
-//                    mMyDevicePreference = new Preference(getActivity());
-//                }
-//
-//                mMyDevicePreference.setSummary(getResources().getString(
-//                        R.string.bluetooth_is_visible_message, mLocalAdapter.getName()));
-//                mMyDevicePreference.setSelectable(false);
-//                preferenceScreen.addPreference(mMyDevicePreference);
-
-                // mLocalAdapter.setScanMode is internally synchronized so it is okay for multiple
-                // threads to execute.
-
                 mEmptyView.setText(getString(
                         R.string.bluetooth_is_visible_message, mLocalAdapter.getName()));
 
@@ -539,10 +441,18 @@ public class BluethoothActivityNew extends BaseStatusBarActivity implements View
 
             case BluetoothAdapter.STATE_TURNING_OFF:
                 messageId = R.string.bluetooth_turning_off;
+                mBluetoothLlSearchDevice.removeAllViews();
+                mBluetoothLlSearchDevicePired.removeAllViews();
                 break;
 
             case BluetoothAdapter.STATE_OFF:
                 messageId = R.string.bluetooth_empty_list_bluetooth_off;
+                mBluetoothRlSearch.setVisibility(View.GONE);
+                mBluetoothIvSearch.setVisibility(View.GONE);
+                mBluetoothTvPair.setVisibility(View.GONE);
+                mBluetoothRlPair.setVisibility(View.GONE);
+                mBluetoothTvSearchDevice.setVisibility(View.GONE);
+                mBluetoothRlSearchDevice.setVisibility(View.GONE);
                 break;
 
             case BluetoothAdapter.STATE_TURNING_ON:
@@ -556,11 +466,10 @@ public class BluethoothActivityNew extends BaseStatusBarActivity implements View
         mEmptyView.setText(messageId);
     }
 
-    private void addDeviceCategory(BluetoothDeviceFilter.Filter filter, boolean addCachedDevices) {
-//        preferenceGroup.setTitle(titleId);
-//        getPreferenceScreen().addPreference(preferenceGroup);
+    private void addDeviceCategory(LinearLayout group, BluetoothDeviceFilter.Filter filter, boolean addCachedDevices) {
+        Logger.getLogger().i("********* addDeviceCategory " + addCachedDevices);
         setFilter(filter);
-//        setDeviceListGroup(preferenceGroup);
+        setDeviceListGroup(group);
         if (addCachedDevices) {
             addCachedDevices();
         }
@@ -573,7 +482,43 @@ public class BluethoothActivityNew extends BaseStatusBarActivity implements View
         } else {
             mBluetoothIvSearch.clearAnimation();
         }
+    }
+
+    void createDeviceView(CachedBluetoothDevice cachedDevice) {
+        if (mDeviceListGroup == null) {
+            Logger.getLogger().i("Trying to create a device view before the list group/category "
+                    + "exists!");
+            return;
+        }
+
+        BluetoothDeviceView deviceView = new BluetoothDeviceView(this, cachedDevice);
+        deviceView.setOnClickListener(this);
+        mDeviceListGroup.addView(deviceView);
+        Logger.getLogger().e("createDeviceView mDeviceListGroup = " + mDeviceListGroup);
+        mDeviceViewMap.put(cachedDevice, deviceView);
+
+        deviceView.setDeviceStateChangeListener(this);
+    }
+
+    private void setDeviceListGroup(LinearLayout group) {
+        Logger.getLogger().e("setDeviceListGroup mDeviceListGroup = " + mDeviceListGroup);
+        mDeviceListGroup = group;
+
+    }
 
 
+    @Override
+    public void onDeviceStateChange(CachedBluetoothDevice device) {
+        mPiredDevice = device;
+        int sumaryResId = Utils.getConnectionSummary(device);
+        if(sumaryResId != 0) {
+            mBluetoothRlPair.setVisibility(View.VISIBLE);
+            mBluetoothTvPair.setVisibility(View.VISIBLE);
+            mBluetoothTvPairName.setText(device.getName());
+            mBluetoothTvPairState.setText(sumaryResId);
+        } else {
+            mBluetoothRlPair.setVisibility(View.GONE);
+            mBluetoothTvPair.setVisibility(View.GONE);
+        }
     }
 }

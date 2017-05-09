@@ -76,11 +76,11 @@ public class MyBluetoothAdapter extends BaseAdapter {
         }
         int type = (Integer)map.get("type");
         if(type > BluetoothClass.Device.PHONE_UNCATEGORIZED && type < BluetoothClass.Device.PHONE_ISDN){
-            holder.icon.setBackgroundResource(R.drawable.phone);
+            holder.icon.setBackgroundResource(R.drawable.ic_bt_cellphone);
         }else if(type > BluetoothClass.Device.COMPUTER_UNCATEGORIZED && type < BluetoothClass.Device.COMPUTER_WEARABLE){
-            holder.icon.setBackgroundResource(R.drawable.pc);
+            holder.icon.setBackgroundResource(R.drawable.ic_bt_laptop);
         }else if(type > BluetoothClass.Device.TOY_UNCATEGORIZED && type < BluetoothClass.Device.TOY_GAME){
-            holder.icon.setBackgroundResource(R.drawable.handle);
+            holder.icon.setBackgroundResource(R.drawable.ic_bt_pointing_hid);
         }
         return convertView;
     }

@@ -31,7 +31,7 @@ import com.zx.zxtvsettings.R;
 import java.util.ArrayList;
 import java.util.List;
 
-final class A2dpProfile implements LocalBluetoothProfile {
+public final class A2dpProfile implements LocalBluetoothProfile {
     private static final String TAG = "A2dpProfile";
     private static boolean V = true;
 

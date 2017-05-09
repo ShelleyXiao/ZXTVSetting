@@ -23,6 +23,8 @@ import android.content.Context;
 import android.os.ParcelUuid;
 import android.util.Log;
 
+import com.zx.zxtvsettings.R;
+
 import java.util.Set;
 
 /**
@@ -216,4 +218,5 @@ public final class LocalBluetoothAdapter {
             syncBluetoothState();
         }
     }
+
 }

@@ -116,4 +116,16 @@
 
     <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"在 <xliff:g id="DEVICE_NAME">%1$s</xliff:g> 上开启蓝牙设置后，附近的设备将可以检测到该设备。"</string>
 
+    <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"此操作将会断开您与以下设备的连接：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"要断开连接吗？"</string>
+
+    <string name="bluteooth_pired">已配对</string>
+
+    <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"要停用配置文件吗？"</string>
+    <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"此操作将停用：&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;来自：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_connected_no_headset" msgid="2866994875046035609">"已连接（无手机）"</string>
+    <string name="bluetooth_connected_no_a2dp" msgid="4576188601581440337">"已连接（无媒体）"</string>
+    <string name="bluetooth_connected_no_map" msgid="6504436917057479986">"已连接（无消息权限）"</string>
+    <string name="bluetooth_connected_no_headset_no_a2dp" msgid="9195757766755553810">"已连接（没有手机或媒体信号）"</string>
+
 </resources>

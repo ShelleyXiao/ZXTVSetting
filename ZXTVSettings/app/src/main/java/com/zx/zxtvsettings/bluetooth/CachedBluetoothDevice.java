@@ -568,15 +568,15 @@ public final class CachedBluetoothDevice implements Comparable<CachedBluetoothDe
         }
     }
 
-    BluetoothClass getBtClass() {
+    public BluetoothClass getBtClass() {
         return mBtClass;
     }
 
-    List<LocalBluetoothProfile> getProfiles() {
+    public List<LocalBluetoothProfile> getProfiles() {
         return Collections.unmodifiableList(mProfiles);
     }
 
-    List<LocalBluetoothProfile> getConnectableProfiles() {
+    public  List<LocalBluetoothProfile> getConnectableProfiles() {
         List<LocalBluetoothProfile> connectableProfiles =
                 new ArrayList<LocalBluetoothProfile>();
         for (LocalBluetoothProfile profile : mProfiles) {
@@ -587,7 +587,7 @@ public final class CachedBluetoothDevice implements Comparable<CachedBluetoothDe
         return connectableProfiles;
     }
 
-    List<LocalBluetoothProfile> getRemovedProfiles() {
+    public List<LocalBluetoothProfile> getRemovedProfiles() {
         return mRemovedProfiles;
     }
 
@@ -669,13 +669,13 @@ public final class CachedBluetoothDevice implements Comparable<CachedBluetoothDe
     }
 
     public void setPhonebookPermissionChoice(int permissionChoice) {
-        int permission = BluetoothDevice.ACCESS_UNKNOWN;
-        if (permissionChoice == ACCESS_ALLOWED) {
-            permission = BluetoothDevice.ACCESS_ALLOWED;
-        } else if (permissionChoice == ACCESS_REJECTED) {
-            permission = BluetoothDevice.ACCESS_REJECTED;
-        }
-        mDevice.setPhonebookAccessPermission(permission);
+//        int permission = BluetoothDevice.ACCESS_UNKNOWN;
+//        if (permissionChoice == ACCESS_ALLOWED) {
+//            permission = BluetoothDevice.ACCESS_ALLOWED;
+//        } else if (permissionChoice == ACCESS_REJECTED) {
+//            permission = BluetoothDevice.ACCESS_REJECTED;
+//        }
+//        mDevice.setPhonebookAccessPermission(permission);
     }
 
     // Migrates data from old data store (in Settings app's shared preferences) to new (in Bluetooth

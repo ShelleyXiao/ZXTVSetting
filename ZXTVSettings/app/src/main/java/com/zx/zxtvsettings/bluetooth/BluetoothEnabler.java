@@ -25,6 +25,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.Switch;
 
+import com.zx.zxtvsettings.Utils.Logger;
+
 
 /**
  * BluetoothEnabler is a helper to manage the Bluetooth on/off checkbox
@@ -91,11 +93,12 @@ public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener 
     }
 
     public void resume(Context context) {
+        Logger.getLogger().i("onResume ---0");
         if (mLocalAdapter == null) {
             mSwitch.setEnabled(false);
             return;
         }
-
+        Logger.getLogger().i("onResume ---1");
         if (mContext != context) {
             mContext = context;
         }
@@ -143,7 +146,7 @@ public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener 
         }
     }
 
-    private void setChecked(boolean isChecked) {
+    public void setChecked(boolean isChecked) {
         if (isChecked != mSwitch.isChecked()) {
             // set listener to null, so onCheckedChanged won't be called
             // if the checked status on Switch isn't changed by user click
@@ -155,6 +158,10 @@ public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener 
                 mSwitchBar.addOnSwitchChangeListener(this);
             }
         }
+    }
+
+    public boolean isChecked() {
+        return mSwitch.isChecked();
     }
 
     private void updateSearchIndex(boolean isBluetoothOn) {
@@ -175,6 +182,8 @@ public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener 
             // Reset switch to off
             switchView.setChecked(false);
         }
+
+        Logger.getLogger().i("onSwitchChanged isChecked = " + isChecked);
 
         if (mLocalAdapter != null) {
             mLocalAdapter.setBluetoothEnabled(isChecked);

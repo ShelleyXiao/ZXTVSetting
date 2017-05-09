@@ -36,8 +36,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/bluetooth_rl_setting"
         android:layout_below="@+id/statu"
-        android:layout_marginTop="@dimen/px10"
         android:layout_marginLeft="@dimen/px5"
+        android:layout_marginTop="@dimen/px10"
         android:gravity="bottom"
         android:text="@string/bluetooth_setting_title"
         android:textColor="#b6b6b6"
@@ -91,7 +91,7 @@
 
                 <com.zx.zxtvsettings.bluetooth.SwitchBar
                     android:id="@+id/open_switchbar"
-                    android:layout_width="@dimen/px120"
+                    android:layout_width="@dimen/px200"
                     android:layout_height="@dimen/px80"
                     android:layout_alignParentRight="true"
                     android:layout_margin="@dimen/px10"
@@ -201,13 +201,12 @@
                 android:textColor="@color/white"
                 android:textSize="22sp"/>
 
-            <TextView
+            <TextView android:id="@+id/bluetooth_tv_pair_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_margin="8dp"
                 android:gravity="center"
-                android:text="@string/bluetooth_connect_cancel"
                 android:textColor="@color/white"
                 android:textSize="22sp"/>
 
@@ -229,11 +228,12 @@
     <RelativeLayout
         android:id="@+id/bluetooth_rl_search_device"
         android:layout_width="@dimen/px1200"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/px450"
         android:layout_below="@id/bluetooth_rl_pair"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/px50"
+        android:paddingBottom="@dimen/px10"
         android:background="@drawable/about_bg"
         android:paddingLeft="@dimen/px30"
         android:paddingRight="@dimen/px30">
@@ -244,7 +244,49 @@
             android:layout_height="@dimen/px400"
             android:layout_margin="@dimen/px10"
             android:layout_marginBottom="@dimen/px15"
-            android:scrollbars="none"/>
+            android:scrollbars="none"
+            android:visibility="gone"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:scrollbars="none"
+            android:layout_margin="@dimen/px10"
+            android:layout_marginBottom="@dimen/px15"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
+                <LinearLayout
+                    android:id="@+id/bluetooth_ll_search_device_pired"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+
+                    >
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/bluetooth_ll_search_device"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </ScrollView>
 
     </RelativeLayout>
 </RelativeLayout>

@@ -17,7 +17,8 @@
 package com.zx.zxtvsettings.bluetooth;
 
 import android.content.Context;
-import android.util.Log;
+
+import com.zx.zxtvsettings.Utils.Logger;
 
 /**
  * LocalBluetoothManager provides a simplified interface on top of a subset of
@@ -99,11 +100,11 @@ public final class LocalBluetoothManager {
 
     public synchronized void setForegroundActivity(Context context) {
         if (context != null) {
-            Log.d(TAG, "setting foreground activity to non-null context");
+            Logger.getLogger().i( "setting foreground activity to non-null context");
             mForegroundActivity = context;
         } else {
             if (mForegroundActivity != null) {
-                Log.d(TAG, "setting foreground activity to null");
+                Logger.getLogger().i( "setting foreground activity to null");
                 mForegroundActivity = null;
             }
         }
