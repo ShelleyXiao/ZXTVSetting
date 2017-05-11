@@ -27,6 +27,7 @@ import android.os.ParcelUuid;
 import android.util.Log;
 
 import com.zx.zxtvsettings.R;
+import com.zx.zxtvsettings.Utils.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +58,7 @@ public final class A2dpProfile implements LocalBluetoothProfile {
             implements BluetoothProfile.ServiceListener {
 
         public void onServiceConnected(int profile, BluetoothProfile proxy) {
-            if (V) Log.d(TAG,"Bluetooth service connected");
+            if (V) Log.e(TAG,"Bluetooth service connected");
             mService = (BluetoothA2dp) proxy;
             // We just bound to the service, so refresh the UI for any connected A2DP devices.
             List<BluetoothDevice> deviceList = mService.getConnectedDevices();
@@ -72,6 +73,7 @@ public final class A2dpProfile implements LocalBluetoothProfile {
                 device.onProfileStateChanged(A2dpProfile.this, BluetoothProfile.STATE_CONNECTED);
                 device.refresh();
             }
+            Logger.getLogger().i("a2dp mService state ");
             mIsProfileReady=true;
         }
 

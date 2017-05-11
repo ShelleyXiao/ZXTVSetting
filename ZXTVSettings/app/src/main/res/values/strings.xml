@@ -226,7 +226,7 @@
     <string name="bluetooth_connect_canceling">正在取消配对..</string>
     <string name="bluetooth_scan_device">搜索设备</string>
     <string name="bluetooth_scan_title">搜索到的设备</string>
-    <string name="bluetooth_connected_device">可配对的设备</string>
+    <string name="bluetooth_connected_device">已配对的设备</string>
     <string name="bluetooth_connectting">正在配对</string>
     <string name="bluetooth_connected">配对完成</string>
     <string name="bluetooth_disabled">配对完成</string>

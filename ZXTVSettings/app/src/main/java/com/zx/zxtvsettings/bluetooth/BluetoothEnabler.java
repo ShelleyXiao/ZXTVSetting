@@ -93,12 +93,10 @@ public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener 
     }
 
     public void resume(Context context) {
-        Logger.getLogger().i("onResume ---0");
         if (mLocalAdapter == null) {
             mSwitch.setEnabled(false);
             return;
         }
-        Logger.getLogger().i("onResume ---1");
         if (mContext != context) {
             mContext = context;
         }
@@ -122,6 +120,7 @@ public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener 
     }
 
     void handleStateChanged(int state) {
+        Logger.getLogger().i("enable handleStateChanged " + state);
         switch (state) {
             case BluetoothAdapter.STATE_TURNING_ON:
                 mSwitch.setEnabled(false);

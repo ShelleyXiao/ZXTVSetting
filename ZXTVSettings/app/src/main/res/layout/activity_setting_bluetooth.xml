@@ -168,7 +168,9 @@
         android:gravity="center"
         android:text="@string/bluetooth_connected_device"
         android:textColor="@color/white"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:visibility="gone"
+        />
 
     <RelativeLayout
         android:id="@+id/bluetooth_rl_pair"
@@ -179,8 +181,12 @@
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/px50"
         android:background="@drawable/about_bg"
+        android:paddingBottom="@dimen/px15"
         android:paddingLeft="@dimen/px30"
-        android:paddingRight="@dimen/px30">
+        android:paddingRight="@dimen/px30"
+        android:paddingTop="@dimen/px15"
+        android:visibility="gone"
+        >
 
         <RelativeLayout
             android:id="@+id/bluetooth_rl_pair1"
@@ -195,20 +201,22 @@
                 android:id="@+id/bluetooth_tv_pair_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_marginLeft="@dimen/px5"
+                android:layout_marginRight="@dimen/px5"
                 android:gravity="center"
-                android:text="@string/bluetooth_not_conected"
                 android:textColor="@color/white"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
-            <TextView android:id="@+id/bluetooth_tv_pair_state"
+            <TextView
+                android:id="@+id/bluetooth_tv_pair_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_margin="8dp"
+                android:layout_marginLeft="@dimen/px5"
+                android:layout_marginRight="@dimen/px5"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
         </RelativeLayout>
     </RelativeLayout>
@@ -233,8 +241,8 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/px50"
-        android:paddingBottom="@dimen/px10"
         android:background="@drawable/about_bg"
+        android:paddingBottom="@dimen/px10"
         android:paddingLeft="@dimen/px30"
         android:paddingRight="@dimen/px30">
 
@@ -250,10 +258,10 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:scrollbars="none"
             android:layout_margin="@dimen/px10"
             android:layout_marginBottom="@dimen/px15"
+            android:orientation="vertical"
+            android:scrollbars="none"
             >
 
             <LinearLayout

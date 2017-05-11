@@ -165,6 +165,7 @@ public final class Utils {
                 return R.string.bluetooth_pairing;
 
             case BluetoothDevice.BOND_BONDED:
+                return R.string.bluteooth_pired;
             case BluetoothDevice.BOND_NONE:
             default:
                 return 0;

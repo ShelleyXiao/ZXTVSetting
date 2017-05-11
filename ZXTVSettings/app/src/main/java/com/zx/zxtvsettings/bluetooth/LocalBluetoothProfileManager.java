@@ -29,6 +29,8 @@ import android.content.Intent;
 import android.os.ParcelUuid;
 import android.util.Log;
 
+import com.zx.zxtvsettings.bluetooth.view.BluetoothDeviceView;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -63,6 +65,14 @@ public final class LocalBluetoothProfileManager {
          * the BluetoothHeadset service, but may be called more often in future.
          */
         void onServiceDisconnected();
+    }
+
+    public interface IDeviceContectedListener {
+
+        void onDeviceContected(CachedBluetoothDevice device, boolean connected);
+
+
+
     }
 
     private final Context mContext;
@@ -180,6 +190,10 @@ public final class LocalBluetoothProfileManager {
     private final Collection<ServiceListener> mServiceListeners =
             new ArrayList<ServiceListener>();
 
+    private final Collection<IDeviceContectedListener> mDeviceContectedListeners =
+            new ArrayList<IDeviceContectedListener>();
+
+
     private void addProfile(LocalBluetoothProfile profile,
                             String profileName, String stateChangedAction) {
         mEventManager.addProfileHandler(stateChangedAction, new StateChangedHandler(profile));
@@ -263,6 +277,16 @@ public final class LocalBluetoothProfileManager {
         mServiceListeners.remove(l);
     }
 
+    // called from UI.
+    public void addDeviceConntectedListener(IDeviceContectedListener l) {
+        mDeviceContectedListeners.add(l);
+    }
+
+    // called from UI
+    public void removeDeviceConntectedListener(IDeviceContectedListener l) {
+        mDeviceContectedListeners.remove(l);
+    }
+
     // not synchronized: use only from UI thread! (TODO: verify)
     public void callServiceConnectedListeners() {
         for (ServiceListener l : mServiceListeners) {
@@ -274,6 +298,12 @@ public final class LocalBluetoothProfileManager {
     public void callServiceDisconnectedListeners() {
         for (ServiceListener listener : mServiceListeners) {
             listener.onServiceDisconnected();
+        }
+    }
+
+    public void callDevicesConnectedListeners(CachedBluetoothDevice device, boolean connceted) {
+        for (IDeviceContectedListener l : mDeviceContectedListeners) {
+            l.onDeviceContected(device, connceted);
         }
     }
 

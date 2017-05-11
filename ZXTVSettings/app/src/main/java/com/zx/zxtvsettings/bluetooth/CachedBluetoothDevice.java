@@ -156,6 +156,11 @@ public final class CachedBluetoothDevice implements Comparable<CachedBluetoothDe
             mRemovedProfiles.add(profile);
             mLocalNapRoleConnected = false;
         }
+        if(newProfileState == BluetoothAdapter.STATE_CONNECTED) {
+            mProfileManager.callDevicesConnectedListeners(this, true);
+        } else if(newProfileState == BluetoothAdapter.STATE_DISCONNECTED) {
+            mProfileManager.callDevicesConnectedListeners(this, false);
+        }
     }
 
     public CachedBluetoothDevice(Context context,
@@ -718,7 +723,7 @@ public final class CachedBluetoothDevice implements Comparable<CachedBluetoothDe
         } else if (permissionChoice == ACCESS_REJECTED) {
             permission = BluetoothDevice.ACCESS_REJECTED;
         }
-        mDevice.setMessageAccessPermission(permission);
+//        mDevice.setMessageAccessPermission(permission);
     }
 
     // Migrates data from old data store (in Settings app's shared preferences) to new (in Bluetooth

@@ -25,6 +25,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.zx.zxtvsettings.R;
+import com.zx.zxtvsettings.Utils.Logger;
 
 import java.util.List;
 
@@ -67,6 +68,9 @@ public final class HidProfile implements LocalBluetoothProfile {
                 device.onProfileStateChanged(HidProfile.this, BluetoothProfile.STATE_CONNECTED);
                 device.refresh();
             }
+
+            Logger.getLogger().i("hid mService state ");
+
             mIsProfileReady=true;
         }
 

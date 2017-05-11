@@ -47,12 +47,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.NetSetting"
-                  android:taskAffinity="com.zx.zxtvsettings"
-                  android:launchMode="singleInstance"
-                  android:excludeFromRecents="true"
-                  android:noHistory="true"
-                  android:exported="true">
+        <activity
+            android:name=".activity.NetSetting"
+            android:clearTaskOnLaunch="true"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:launchMode="singleInstance"
+            android:noHistory="true"
+            android:taskAffinity="com.zx.zxtvsettings"
+            >
 
         </activity>
 
@@ -61,10 +64,17 @@
         <activity android:name=".activity.WIfiApActivity"></activity>
         <activity android:name=".activity.BluethoothActivityNew"></activity>
 
-        <activity android:name=".bluetooth.BluetoothPairingDialog"
-                  android:label="@string/bluetooth_pairing_request"
-                  android:excludeFromRecents="true"
-                  android:theme="@android:style/Theme.Material.Light.Dialog.Alert">
+        <activity
+            android:name=".activity.BluethoothActivityNew"
+            android:clearTaskOnLaunch="true"
+            android:exported="true"
+            ></activity>
+
+        <activity
+            android:name=".bluetooth.view.BluetoothPairingDialog"
+            android:excludeFromRecents="true"
+            android:label="@string/bluetooth_pairing_request"
+            android:theme="@android:style/Theme.Material.Light.Dialog.Alert">
             <intent-filter>
                 <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -85,11 +95,12 @@
         <activity android:name=".activity.ClearGarbageActivity"></activity>
         <activity android:name=".activity.DisplayModeActivity"></activity>
 
-        <activity android:name=".wifi.WifiConnectDailogActivity"
-                  android:theme="@style/PlatformDialog"
-                  android:launchMode="singleInstance"
-                  android:excludeFromRecents="true"
-                  android:noHistory="true">
+        <activity
+            android:name=".wifi.WifiConnectDailogActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:noHistory="true"
+            android:theme="@style/PlatformDialog">
 
             <intent-filter>
                 <category android:name="android.intent.category.INFO" />

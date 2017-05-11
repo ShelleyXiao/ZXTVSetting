@@ -38,7 +38,7 @@ import java.util.List;
 
 
 public class BluetoothDeviceView extends FrameLayout implements
-        CachedBluetoothDevice.Callback, View.OnClickListener {
+        CachedBluetoothDevice.Callback {
 
     private static int sDimAlpha = Integer.MIN_VALUE;
 
@@ -52,7 +52,6 @@ public class BluetoothDeviceView extends FrameLayout implements
     private ImageView mDeviceIcon;
     private TextView mDeviceSumary;
 
-    private IDeviceStateChangeListener mDeviceStateChangeListener;
 
     public BluetoothDeviceView(@NonNull Context context, CachedBluetoothDevice cachedDevice) {
         super(context);
@@ -69,10 +68,10 @@ public class BluetoothDeviceView extends FrameLayout implements
 
         bindView();
 
-    }
+        setBackgroundResource(R.drawable.sel_focus);
+        setFocusable(true);
+        setDescendantFocusability(FOCUS_BLOCK_DESCENDANTS);
 
-    public void setDeviceStateChangeListener(IDeviceStateChangeListener deviceStateChangeListener) {
-        mDeviceStateChangeListener = deviceStateChangeListener;
     }
 
 
@@ -99,27 +98,18 @@ public class BluetoothDeviceView extends FrameLayout implements
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        Logger.getLogger().w("onAttachedToWindow");
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        Logger.getLogger().w("onDetachedFromWindow");
-        mDeviceStateChangeListener = null;
+        mCachedDevice.unregisterCallback(this);
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 
     @Override
     public void onDeviceAttributesChanged() {
         bindView();
-        if(null != mDeviceStateChangeListener) {
-            mDeviceStateChangeListener.onDeviceStateChange(mCachedDevice);
-        }
     }
 
     public void onClicked() {
@@ -160,60 +150,6 @@ public class BluetoothDeviceView extends FrameLayout implements
         } else {
 
 
-        }
-    }
-
-    private int getConnectionSummary() {
-        final CachedBluetoothDevice cachedDevice = mCachedDevice;
-
-        boolean profileConnected = false;       // at least one profile is connected
-        boolean a2dpNotConnected = false;       // A2DP is preferred but not connected
-        boolean headsetNotConnected = false;    // Headset is preferred but not connected
-
-        for (LocalBluetoothProfile profile : cachedDevice.getProfiles()) {
-            int connectionStatus = cachedDevice.getProfileConnectionState(profile);
-
-            switch (connectionStatus) {
-                case BluetoothProfile.STATE_CONNECTING:
-                case BluetoothProfile.STATE_DISCONNECTING:
-                    return Utils.getConnectionStateSummary(connectionStatus);
-
-                case BluetoothProfile.STATE_CONNECTED:
-                    profileConnected = true;
-                    break;
-
-                case BluetoothProfile.STATE_DISCONNECTED:
-                    if (profile.isProfileReady()) {
-                        if (profile instanceof A2dpProfile) {
-                            a2dpNotConnected = true;
-                        } else if (profile instanceof HeadsetProfile) {
-                            headsetNotConnected = true;
-                        }
-                    }
-                    break;
-            }
-        }
-
-        if (profileConnected) {
-            if (a2dpNotConnected && headsetNotConnected) {
-                return R.string.bluetooth_connected_no_headset_no_a2dp;
-            } else if (a2dpNotConnected) {
-                return R.string.bluetooth_connected_no_a2dp;
-            } else if (headsetNotConnected) {
-                return R.string.bluetooth_connected_no_headset;
-            } else {
-                return R.string.bluetooth_connected;
-            }
-        }
-
-        switch (cachedDevice.getBondState()) {
-            case BluetoothDevice.BOND_BONDING:
-                return R.string.bluetooth_pairing;
-
-            case BluetoothDevice.BOND_BONDED:
-            case BluetoothDevice.BOND_NONE:
-            default:
-                return 0;
         }
     }
 
@@ -260,10 +196,10 @@ public class BluetoothDeviceView extends FrameLayout implements
     }
 
 
-    public interface IDeviceStateChangeListener {
-
-        void onDeviceStateChange(CachedBluetoothDevice device);
-
-    }
+//    public interface IDeviceStateChangeListener {
+//
+//        void onDeviceStateChange(CachedBluetoothDevice device);
+//
+//    }
 
 }

@@ -17,18 +17,14 @@
 package com.zx.zxtvsettings.bluetooth;
 
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.PowerManager;
-import android.text.TextUtils;
 
-import com.zx.zxtvsettings.R;
+import com.zx.zxtvsettings.bluetooth.view.BluetoothPairingDialog;
 
 /**
  * BluetoothPairingRequest is a receiver for any Bluetooth pairing request. It

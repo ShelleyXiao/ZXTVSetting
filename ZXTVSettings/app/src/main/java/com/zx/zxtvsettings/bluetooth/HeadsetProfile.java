@@ -60,7 +60,7 @@ public final class HeadsetProfile implements LocalBluetoothProfile {
             implements BluetoothProfile.ServiceListener {
 
         public void onServiceConnected(int profile, BluetoothProfile proxy) {
-            if (V) Log.d(TAG,"Bluetooth service connected");
+            if (V) Log.e(TAG,"Bluetooth service connected");
             mService = (BluetoothHeadset) proxy;
             // We just bound to the service, so refresh the UI for any connected HFP devices.
             List<BluetoothDevice> deviceList = mService.getConnectedDevices();
